@@ -1,177 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Start Page Catanzaro</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page Catanzaro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-.roboto-mono {
-  font-family: "Roboto Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-}
+      .roboto-mono {
+        font-family: "Roboto Mono", monospace;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+      }
 
-        body {
-            font-family: "Roboto Mono", sans-serif;
-            font-size: 17px;
-            margin: 0;
-            padding: 0;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            grid-template-columns: 200px 1fr;
-            height: 100vh;
-        }
-        header {
-            grid-column: 1 / -1;
-            background-color: #a3d65c;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        aside {
-            background-color: #f4f4f4;
-            padding: 1rem;
-        }
-        aside ul {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-        }
-        aside ul li {
-            margin: 1rem 0;
-        }
-        aside ul li a {
-            text-decoration: none;
-            color: #333;
-        }
-        main {
-            padding: 1rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            grid-gap: 1rem;
-        }
-        .card {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1rem;
-            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-        .card h3 {
-            margin-top: 0;
-            color: #a3d65c;
-        }
-        .imagen img{
-            max-width: 100%;
-            height: auto;
-            margin: 0 auto;
-            
-        }
-        footer {
-            grid-column: 1 / -1;
-            background-color: #f4f4f4;
-            padding: 1rem;
-            text-align: center;
-        }
+      body {
+        font-family: "Roboto Mono", sans-serif;
+        font-size: 17px;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 200px 1fr;
+        height: 100vh;
+      }
+      header {
+        grid-column: 1 / -1;
+        background-color: #a3d65c;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+      aside {
+        background-color: #f4f4f4;
+        padding: 1rem;
+      }
+      aside ul {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+      }
+      aside ul li {
+        margin: 1rem 0;
+      }
+      aside ul li a {
+        text-decoration: none;
+        color: #333;
+      }
+      main {
+        padding: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 1rem;
+      }
+      .card {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      .card h3 {
+        margin-top: 0;
+        color: #a3d65c;
+      }
+      .imagen img {
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+      }
+      footer {
+        grid-column: 1 / -1;
+        background-color: #f4f4f4;
+        padding: 1rem;
+        text-align: center;
+      }
 
-        a:hover {
-            background-color: #a3d65c;
-            color:white;
-        }
-        .task-input {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .task-input input {
-            width: 70%;
-            padding: 0.75rem;
-            font-size: 0.9rem; /* Aumentar el tamaño del texto en el campo de entrada */
-            font-family: "Roboto Mono", sans-serif;
-            margin-right: 0.5rem;
-        }
-        .task-input button {
-            padding: 0.75rem;
-            font-size: 1.20rem; /* Aumentar el tamaño del texto en el botón */
-            background-color: #a3d65c;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .task-input button:hover {
-            background-color: #a3d65c;
-        }
-        #task-list li {
-            font-size: 1.20rem; /* Aumentar el tamaño del texto en la lista de tareas */
-            margin: 0.5rem 0;
-        }
+      a:hover {
+        background-color: #a3d65c;
+        color: white;
+      }
+      .task-input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .task-input input {
+        width: 70%;
+        padding: 0.75rem;
+        font-size: 0.9rem; /* Aumentar el tamaño del texto en el campo de entrada */
+        font-family: "Roboto Mono", sans-serif;
+        margin-right: 0.5rem;
+      }
+      .task-input button {
+        padding: 0.75rem;
+        font-size: 1.2rem; /* Aumentar el tamaño del texto en el botón */
+        background-color: #a3d65c;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .task-input button:hover {
+        background-color: #a3d65c;
+      }
+      #task-list li {
+        font-size: 1.2rem; /* Aumentar el tamaño del texto en la lista de tareas */
+        margin: 0.5rem 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Start Page</h1>
+      <h1>Start Page</h1>
     </header>
     <aside>
-        <ul>
-            <li><a href="#">Contracts</a></li>
-            <li><a href="#">Forecasts</a></li>
-            <li><a href="#">Shipping Instructions</a></li>
-            <li><a href="#">Operations</a></li>
-        </ul>
+      <ul>
+        <li><a href="./index2.html">Contracts</a></li>
+        <li><a href="#">Forecasts</a></li>
+        <li><a href="#">Shipping Instructions</a></li>
+        <li><a href="#">Operations</a></li>
+      </ul>
     </aside>
     <main>
-        <div class="card">
-            <h3>TO DO List</h3>
-            <div class="task-input">
-                <input type="text" id="task-input" placeholder="Add a new task...">
-                <button onclick="addTask()">+</button>
-            </div>
-            <ul id="task-list">
-                <!-- Tasks will be added here -->
-            </ul>
+      <div class="card">
+        <h3>TO DO List</h3>
+        <div class="task-input">
+          <input type="text" id="task-input" placeholder="Add a new task..." />
+          <button onclick="addTask()">+</button>
         </div>
-        <div class="card">
-            <h3>Calendar</h3>
-            <p>Events and deadlines</p>
-        </div>
-        <div class="card">
-            <h3>Messages</h3>
-            <p>No new messages</p>
-        </div>
-        <div class="card">
-            <h3>Notifications</h3>
-            <p>No new notifications</p>
-        </div>
+        <ul id="task-list">
+          <!-- Tasks will be added here -->
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Calendar</h3>
+        <p>Events and deadlines</p>
+      </div>
+      <div class="card">
+        <h3>Messages</h3>
+        <p>No new messages</p>
+      </div>
+      <div class="card">
+        <h3>Notifications</h3>
+        <p>No new notifications</p>
+      </div>
     </main>
     <footer>
-        <div class="imagen">
-        <img src="./assets/photos/logo_tipo-_1__1.png" alt="Logo">
-        <p> Santiago, Chile</p>
+      <div class="imagen">
+        <img src="./assets/photos/logo_tipo-_1__1.png" alt="Logo" />
+        <p>Santiago, Chile</p>
         <p>Luis Thayer Ojeda 2056</p>
         <p>Providencia</p>
         <p>+56944997230</p>
-    </div>
+      </div>
     </footer>
     <script>
-        function addTask() {
-            var taskInput = document.getElementById('task-input');
-            var taskList = document.getElementById('task-list');
-            var newTaskText = taskInput.value;
+      function addTask() {
+        var taskInput = document.getElementById("task-input");
+        var taskList = document.getElementById("task-list");
+        var newTaskText = taskInput.value;
 
-            if (newTaskText.trim() !== "") {
-                var newTask = document.createElement('li');
-                newTask.textContent = newTaskText;
-                taskList.appendChild(newTask);
-                taskInput.value = "";
-            }
+        if (newTaskText.trim() !== "") {
+          var newTask = document.createElement("li");
+          newTask.textContent = newTaskText;
+          taskList.appendChild(newTask);
+          taskInput.value = "";
         }
+      }
     </script>
-</body>
+  </body>
 </html>
