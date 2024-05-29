@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PO/PI FORM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+        
+    <style>
+
+.roboto-mono {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+        body {
+            font-family: "Roboto Mono", monospace;
+            margin: 22px;
+            padding: 0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 200px;
+            grid-template-areas:
+                "header sidebar"
+                "main sidebar"
+                "footer sidebar";
+            height: 100vh;
+        }
+
+        header {
+            grid-area: header;
+            background-color: #a3d65c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        header select, header input {
+            margin-left: 20px;
+        }
+
+        main {
+    grid-area: main;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+}
+
+.seller, .agent {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+}
+
+.client {
+    justify-self: end;
+}
+
+
+        footer {
+            grid-area: footer;
+            padding: 30px;
+            background-color: #a3d65c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+            padding-left: 15px;
+            padding-right: 20px;
+            background-color: white;
+            
+        }
+
+        .table-container {
+            grid-column: span 2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            
+            
+        }
+
+        th {
+            background-color:#a3d65c;
+            
+        }
+
+     
+        .comments, .totals {
+            grid-column: span 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .notifications, .errors {
+            grid-column: span 2;
+            margin-top: 10px;
+            color: red;
+        }
+
+        .totals div, .comments div {
+            display: flex;
+            align-items: center;
+        }
+
+        .totals div input, .comments div input {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+ <button> <a href="./index.html">Landing page</a> </button>
+  <body>
+    <div class="container">
+        <header>
+            <select name="po-pi">
+                <option value="po">PO</option>
+                <option value="pi">PI</option>
+            </select>
+            <input type="text" placeholder="ORDER NUMBER">
+            <input type="date" placeholder="ORDER DATE">
+        </header>
+        <main>
+          <div class="seller">
+            <label for="seller">SELLER</label>
+            <select id="seller">
+                <option value="seller1">Seller 1</option>
+                <option value="seller2">Seller 2</option>
+            </select>
+            <input type="text" placeholder="Dirección del Seller" readonly>
+            <input type="text" placeholder="Bank Details del Seller" readonly>
+        </div>
+        <div class="agent">
+            <label for="agent">AGENT/BUYER</label>
+            <select id="agent">
+                <option value="agent1">Agent 1</option>
+                <option value="agent2">Agent 2</option>
+            </select>
+            <input type="text" placeholder="Dirección del Agent/Buyer" readonly>
+            <input type="text" placeholder="Bank Details del Agent/Buyer" readonly>
+        </div>
+        <div class="client">
+            <label for="client">CLIENT</label>
+            <select id="client">
+                <option value="client1">Client 1</option>
+                <option value="client2">Client 2</option>
+            </select>
+        </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Product</th>
+                            <th>Packaging</th>
+                            <th>UNIT PRICE</th>
+                            <th>COMMISSION Type</th>
+                            <th>COMMISSION %</th>
+                            <th>TOTAL PRICE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="number"></td>
+                            <td><select><option>Product 1</option></select></td>
+                            <td><select><option>Packaging 1</option></select></td>
+                            <td><input type="number"></td>
+                            <td><select><option>FOB</option></select></td>
+                            <td><input type="number"></td>
+                            <td><input type="number" readonly></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button>+</button>
+            </div>
+            <div class="totals">
+                <div>
+                    <label for="total-sum">TOTAL SUM</label>
+                    <input type="text" id="total-sum" readonly>
+                </div>
+                <div>
+                    <label for="total-weight">TOTAL WEIGHT</label>
+                    <input type="text" id="total-weight" readonly>
+                </div>
+            </div>
+            <div class="comments">
+                <div>
+                    <label for="comments">COMMENTS</label>
+                    <input type="text" id="comments">
+                </div>
+            </div>
+           
+        </main>
+        <div class="sidebar">
+            <div>
+                <label for="currency">CURRENCY</label>
+                <select id="currency">
+                    <option value="usd">USD</option>
+                    <option value="eur">EUR</option>
+                </select>
+            </div>
+            <div>
+                <label for="weight-unit">WEIGHT UNIT</label>
+                <select id="weight-unit">
+                    <option value="kg">KG</option>
+                    <option value="mt">MT</option>
+                </select>
+            </div>
+            <div>
+                <label for="area">AREA</label>
+                <select id="area">
+                    <option value="jc">JC</option>
+                    <option value="pym">PYM</option>
+                </select>
+            </div>
+            <div>
+                <label for="email">Personal Email</label>
+                <input type="email" id="email" readonly>
+            </div>
+        </div>
+        <footer>
+            <button>Authorize PO/PI</button>
+            <button>Request PO/PI Authorization</button>
+            <button>Get information from PO</button>
+        </footer>
+        <div class="notifications">
+          Notifications will be shown here.
+      </div>
+      <div class="errors">
+          Errors will be shown here.
+      </div>
+    </div>
+</body>
+</html>
