@@ -45,7 +45,6 @@
         padding: 20px;
         background-color: white;
       }
-      
 
       header {
         grid-area: header;
@@ -57,7 +56,8 @@
       }
 
       header select,
-      header input {
+      header input,
+      header button {
         margin-left: 20px;
       }
 
@@ -122,15 +122,6 @@
         font-family: "Roboto Mono", monospace;
       }
 
-      .comments,
-      .totals {
-        grid-column: span 2;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-      }
-
       .notifications,
       .errors {
         grid-column: span 2;
@@ -138,15 +129,29 @@
         color: red;
       }
 
-      .totals div,
-      .comments div {
+      .totals {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+        gap: 10px;
+        grid-column: span 2;
       }
 
-      .totals div input,
-      .comments div input {
-        margin-left: 10px;
+      .comments,
+      .extra-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 10px;
+        align-self: flex-start;
+        grid-column: span 2;
+      }
+
+      .shipment-schedule {
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
 
       .btn {
@@ -191,33 +196,40 @@
       input {
         font-family: "Roboto Mono", monospace;
       }
+
+      .comments input {
+        width: 100%;
+        box-sizing: border-box; /* Asegura que el padding y borde no afecten al ancho total */
+      }
+
+      .comment-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Ajusta el tamaño del espacio según sea necesario */
+      }
     </style>
   </head>
   <body>
     <div class="container">
-
-
-
-        <!--LOGOS Y BOTON LANDING PAGE-->
+      <!--LOGOS Y BOTON LANDING PAGE-->
       <div class="upper_part">
         <img src="./assets/photos/catanzaro.JPG" alt="Catanzaro" />
         <button class="btn"><a href="./index.html">Landing Page</a></button>
         <img src="./assets/photos/fgbv.JPG" alt="FGBV" />
       </div>
 
-
-
       <!--HEADER Y SELECCIONES DEL AREA, PO/PI, ORDER N, DATE-->
       <header>
         <select id="area">
-            <option value="jc">JC</option>
-            <option value="pym">PYM</option>
+          <option value="jc">JC</option>
+          <option value="pym">PYM</option>
         </select>
         <select name="po-pi">
           <option value="po">PO</option>
           <option value="pi">PI</option>
         </select>
         <input type="text" placeholder="ORDER NUMBER" />
+        <button>SEARCH</button>
         <input type="date" placeholder="ORDER DATE" />
       </header>
 
@@ -233,11 +245,7 @@
           <label for="agent">AGENT/BUYER</label>
           <input type="text" placeholder="Agent/Buyer" readonly />
           <input type="text" placeholder="Dirección del Agent/Buyer" readonly />
-          <input
-            type="text"
-            placeholder="Bank Details del Agent/Buyer"
-            readonly
-          />
+          <input type="text" placeholder="Bank Details del Agent/Buyer" readonly />
         </div>
         <div class="client">
           <label for="client">CLIENT</label>
@@ -304,8 +312,48 @@
             <input type="text" id="total-weight" readonly />
           </div>
         </div>
-        <div class="comments">
+        <div class="extra-info">
           <div>
+            <label for="delivery-terms">DELIVERY TERMS</label>
+            <input type="text" id="delivery-terms" />
+          </div>
+          <div>
+            <label for="pol">POL</label>
+            <input type="text" id="pol" />
+          </div>
+          <div>
+            <label for="pod">POD</label>
+            <input type="text" id="pod" />
+          </div>
+          <div class="shipment-schedule">
+            <label for="shipment-schedule">SHIPMENT SCHEDULE</label>
+            <div>
+              <label for="from">FROM</label>
+              <input type="date" id="from" />
+              <label for="till">TILL</label>
+              <input type="date" id="till" />
+            </div>
+          </div>
+          <div>
+            <label for="quality-requirement">QUALITY REQUIREMENT</label>
+            <input type="text" id="quality-requirement" />
+          </div>
+          <div>
+            <label for="terms-of-payment">TERMS OF PAYMENT</label>
+            <div>
+              <input type="text" id="prepayment" placeholder="0.00% Prepayment" />
+            </div>
+            <div>
+              <input type="text" id="cad" placeholder="0.00% CAD" />
+            </div>
+            <div>
+              <input type="text" id="credit" placeholder="0.00% Credit" />
+              <input type="number" id="credit-days" placeholder="0" />
+            </div>
+          </div>
+        </div>
+        <div class="comments">
+          <div class="comment-container">
             <label for="comments">COMMENTS</label>
             <input type="text" id="comments" />
           </div>
@@ -321,3 +369,4 @@
     </div>
   </body>
 </html>
+
