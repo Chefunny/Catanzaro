@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PO/PI Forms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <?!= include("css/navigation"); ?>
+  <?!= include("css/contractsform"); ?>
+  <base target="_top">
+</head>
+<body>
+  <header>
+    <h1>PO/PI Forms</h1>
+    <div class="header-right">Hello ___</div>
+  </header>
+  <div class="container">
+    <aside>
+      <ul>
+        <li><a href="<?= createUrl('dashboard') ?>">Dashboard</a></li>
+        <li><a href="<?= createUrl('contracts') ?>">Contracts</a></li>
+        <li><a href="<?= createUrl('forecasts') ?>">Forecasts</a></li>
+        <li><a href="<?= createUrl('operations') ?>">Operations</a></li>
+      </ul>
+    </aside>
+    <main>
+      <section class="content">
+        <h2>Purchase Order Form</h2>
+        <form id="po-form">
+          <div class="form-row">
+            <div class="form-column">
+              <div class="form-group">
+                <label for="seller">Seller:</label>
+                <select id="seller" name="seller">
+                  <option value="seller1">Seller 1</option>
+                  <option value="seller2">Seller 2</option>
+                </select>
+              </div>
+              <div class="form-group">
+              </div> <!-- DONT ERASE -->
+              <div class="form-group">
+              </div>
+            </div>
+            <div class="form-column">
+              <div class="form-group">
+                <label for="agent-buyer">Agent/Buyer:</label>
+                <select id="agent-buyer" name="agent-buyer">
+                  <option value="agent1">Agent 1</option>
+                  <option value="agent2">Agent 2</option>
+                </select>
+              </div>
+              <div class="form-group">
+              </div> <!-- DONT ERASE -->
+              <div class="form-group">
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-column-full">
+              <div class="form-group">
+                <label for="client">Client:</label>
+                <select id="client" name="client">
+                  <option value="client1">Client 1</option>
+                  <option value="client2">Client 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <h3>Products</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Quantity
+                  <select id="weight-unit" onchange="updateTotals()">
+                    <option value="KG">KG</option>
+                    <option value="MT">MT</option>
+                  </select>
+                </th>
+                <th>Product</th>
+                <th>Packaging</th>
+                <th>
+                  Unit Price
+                  <select id="currency" onchange="updateTotals()">
+                    <option value="USD">USD</option>
+                    <option value="RUB">RUB</option>
+                    <option value="EURO">EURO</option>
+                  </select>
+                </th>
+                <th>Commission % from <select id="commission-type" name="commission-type">
+                  <option value="FOB">FOB</option>
+                  <option value="CIF">CIF</option>
+                </select></th>
+                <th>Total (<span id="total-currency">USD</span>)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="number" class="quantity" name="quantity1" oninput="updateTotals()"></td>
+                <td>
+                  <select class="product" name="product1">
+                    <option value="product1">Product 1</option>
+                    <option value="product2">Product 2</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="packaging" name="packaging1">
+                    <option value="packaging1">Packaging 1</option>
+                    <option value="packaging2">Packaging 2</option>
+                  </select>
+                </td>
+                <td><input type="number" class="unit-price" name="unit-price1" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="commission" name="commission1" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="total" name="total1" readonly></td>
+              </tr>
+              <tr>
+                <td><input type="number" class="quantity" name="quantity2" oninput="updateTotals()"></td>
+                <td>
+                  <select class="product" name="product2">
+                    <option value="product1">Product 1</option>
+                    <option value="product2">Product 2</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="packaging" name="packaging2">
+                    <option value="packaging1">Packaging 1</option>
+                    <option value="packaging2">Packaging 2</option>
+                  </select>
+                </td>
+                <td><input type="number" class="unit-price" name="unit-price2" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="commission" name="commission2" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="total" name="total2" readonly></td>
+              </tr>
+              <tr>
+                <td><input type="number" class="quantity" name="quantity3" oninput="updateTotals()"></td>
+                <td>
+                  <select class="product" name="product3">
+                    <option value="product1">Product 1</option>
+                    <option value="product2">Product 2</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="packaging" name="packaging3">
+                    <option value="packaging1">Packaging 1</option>
+                    <option value="packaging2">Packaging 2</option>
+                  </select>
+                </td>
+                <td><input type="number" class="unit-price" name="unit-price3" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="commission" name="commission3" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="total" name="total3" readonly></td>
+              </tr>
+              <tr>
+                <td><input type="number" class="quantity" name="quantity4" oninput="updateTotals()"></td>
+                <td>
+                  <select class="product" name="product4">
+                    <option value="product1">Product 1</option>
+                    <option value="product2">Product 2</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="packaging" name="packaging4">
+                    <option value="packaging1">Packaging 1</option>
+                    <option value="packaging2">Packaging 2</option>
+                  </select>
+                </td>
+                <td><input type="number" class="unit-price" name="unit-price4" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="commission" name="commission4" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="total" name="total4" readonly></td>
+              </tr>
+              <tr>
+                <td><input type="number" class="quantity" name="quantity5" oninput="updateTotals()"></td>
+                <td>
+                  <select class="product" name="product5">
+                    <option value="product1">Product 1</option>
+                    <option value="product2">Product 2</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="packaging" name="packaging5">
+                    <option value="packaging1">Packaging 1</option>
+                    <option value="packaging2">Packaging 2</option>
+                  </select>
+                </td>
+                <td><input type="number" class="unit-price" name="unit-price5" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="commission" name="commission5" step="0.01" oninput="updateTotals()"></td>
+                <td><input type="number" class="total" name="total5" readonly></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="totals">
+            <div class="form-group">
+              <label for="total-weight">Total Weight (<span id="weight-unit-label">KG</span>):</label>
+              <input type="number" id="total-weight" name="total-weight" readonly>
+            </div>
+            <div class="form-group">
+              <label for="grand-total">Grand Total (<span id="grand-total-currency">USD</span>):</label>
+              <input type="number" id="grand-total" name="grand-total" readonly>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="delivery-terms">Delivery Terms:</label>
+              <select id="delivery-terms" name="delivery-terms">
+                <option value="term1">Term 1</option>
+                <option value="term2">Term 2</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pol">POL:</label>
+              <select id="pol" name="pol">
+                <option value="pol1">POL 1</option>
+                <option value="pol2">POL 2</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pod">POD:</label>
+              <select id="pod" name="pod">
+                <option value="pod1">POD 1</option>
+                <option value="pod2">POD 2</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quality-requirement">Quality Requirement:</label>
+              <select id="quality-requirement" name="quality-requirement">
+                <option value="quality1">Quality 1</option>
+                <option value="quality2">Quality 2</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-column-full">
+              <h3>Shipment Schedule</h3>
+              <div class="form-group">
+                <label for="shipment-from">From:</label>
+                <input type="date" id="shipment-from" name="shipment-from">
+              </div>
+              <div class="form-group">
+                <label for="shipment-to">To:</label>
+                <input type="date" id="shipment-to" name="shipment-to">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-column-full">
+              <h3>Terms of Payment</h3>
+              <div class="form-group">
+                <label for="prepayment">Prepayment %:</label>
+                <input type="number" id="prepayment" name="prepayment" step="0.01">
+              </div>
+              <div class="form-group">
+                <label for="cad">CAD %:</label>
+                <input type="number" id="cad" name="cad" step="0.01">
+              </div>
+              <div class="form-group">
+                <label for="credit">Credit:</label>
+                <input type="number" id="credit" name="credit" step="0.01"> %
+                <input type="number" id="credit-days" name="credit-days"> days after
+                <select id="credit-days-type" name="credit-days-type">
+                  <option value="departure">departure</option>
+                  <option value="arrival">arrival</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+      <section class="sidebar">
+        <h2>Contract Options</h2>
+        <label for="contract-type">Area Selected:</label>
+        <select id="contract-type" name="contract-type" onchange="updateClientLabel()">
+          <option value="jc">JC</option>
+          <option value="fsf">F&SF</option>
+        </select>
+        <label for="contract-status">Contract Type:</label>
+        <select id="contract-status" name="contract-status" onchange="updateClientLabel()">
+          <option value="po">PO</option>
+          <option value="pi">PI</option>
+        </select>
+        <label for="contract-number">Get Data From Contract:</label>
+        <div class="contract-number-container">
+          <input type="text" id="contract-number" name="contract-number" placeholder="Contract Number">
+          <button>Search</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('currency').addEventListener('change', function() {
+      const currency = this.value;
+      document.getElementById('total-currency').textContent = currency;
+      document.getElementById('grand-total-currency').textContent = currency;
+      updateTotals();
+    });
+
+    document.getElementById('weight-unit').addEventListener('change', function() {
+      const unit = this.value;
+      document.getElementById('weight-unit-label').textContent = unit;
+      updateTotals();
+    });
+
+    function updateTotals() {
+      let grandTotal = 0;
+      let totalWeight = 0;
+
+      document.querySelectorAll('tbody tr').forEach(row => {
+        const quantity = parseFloat(row.querySelector('.quantity').value) || 0;
+        const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
+        const total = quantity * unitPrice;
+
+        row.querySelector('.total').value = total.toFixed(2);
+
+        grandTotal += total;
+        totalWeight += quantity;
+      });
+
+      document.getElementById('grand-total').value = grandTotal.toFixed(2);
+      document.getElementById('total-weight').value = totalWeight.toFixed(2);
+    }
+
+    function updateClientLabel() {
+      const contractStatus = document.getElementById('contract-status').value;
+      const clientLabel = document.querySelector('label[for="client"]');
+
+      if (contractStatus === 'pi') {
+        clientLabel.textContent = 'Producer:';
+      } else {
+        clientLabel.textContent = 'Client:';
+      }
+    }
+  </script>
+</body>
+</html>
