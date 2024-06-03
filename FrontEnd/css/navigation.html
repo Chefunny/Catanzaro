@@ -1,0 +1,70 @@
+<style>
+
+body {
+  font-family: "Roboto Mono", monospace;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header"
+    "aside main"
+    "footer footer";
+  height: 100vh;
+}
+
+.header-right {
+  float: right;
+  margin-top: -40px;
+  font-size: 18px;
+}
+
+header {
+  background-color: #a3d65c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  font-size: 24px;
+}
+
+aside {
+  grid-area: aside;
+  background-color: #f4f4f4;
+  padding: 1rem;
+}
+
+aside ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+aside ul li {
+  margin: 1rem 0;
+}
+
+aside ul li a {
+  display: block;
+  padding: 10px 20px;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #fff;
+  background-color: #a3d65c;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+aside ul li a:hover {
+  background-color: #8bb43f;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+</style>

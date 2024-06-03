@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <?!= include("css/navigation"); ?>
+  <?!= include("css/dashboard") ?>
+  <base target="_top">
+</head>
+<body>
+  <header>
+    <h1>Dashboard</h1>
+    <div class="header-right">Hello ___</div>
+  </header>
+  <div class="container">
+    <aside>
+      <ul>
+        <li><a href="<?= createUrl('dashboard') ?>">Dashboard</a></li>
+        <li><a href="<?= createUrl('contracts') ?>">Contracts</a></li>
+        <li><a href="<?= createUrl('forecasts') ?>">Forecasts</a></li>
+        <li><a href="<?= createUrl('operations') ?>">Operations</a></li>
+      </ul>
+    </aside>
+    <main>
+      <div class="card">
+        <h3>TO DO List</h3>
+        <div class="task-input">
+          <input type="text" id="task-input" placeholder="Add a new task...">
+          <button onclick="addTask()">+</button>
+        </div>
+        <ul id="task-list">
+          <!-- Tasks will be added here -->
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Calendar</h3>
+        <p>Events and deadlines</p>
+      </div>
+      <div class="card">
+        <h3>Messages</h3>
+        <p>No new messages</p>
+      </div>
+      <div class="card">
+        <h3>Notifications</h3>
+        <p>No new notifications</p>
+      </div>
+    </main>
+  </div>
+  <footer>
+    <div class="imagen">
+      <img src="https://drive.google.com/uc?export=view&id=1527txCd7ya2STQ9ZT7mHXSFq3V45axkI" alt="Logo">
+      <p>Santiago, Chile</p>
+      <p>Luis Thayer Ojeda 2056</p>
+      <p>Providencia</p>
+      <p>+56944997230</p>
+    </div>
+  </footer>
+  <script>
+    function addTask() {
+      var taskInput = document.getElementById("task-input");
+      var taskList = document.getElementById("task-list");
+      var newTaskText = taskInput.value;
+
+      if (newTaskText.trim() !== "") {
+        var newTask = document.createElement("li");
+        newTask.textContent = newTaskText;
+        taskList.appendChild(newTask);
+        taskInput.value = "";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<style>
+  body {
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "header header"
+      "aside main"
+      "footer footer";
+    height: 100vh;
+  }
+
+  header {
+    grid-area: header;
+    background-color: #a3d65c;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  main {
+    grid-area: main;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1rem;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .card h3 {
+    margin-top: 0;
+    color: #a3d65c;
+  }
+
+  .imagen img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  footer {
+    grid-area: footer;
+    background-color: #f4f4f4;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .task-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .task-input input {
+    width: 70%;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    font-family: "Roboto Mono", sans-serif;
+    margin-right: 0.5rem;
+  }
+
+  .task-input button {
+    padding: 0.75rem;
+    font-size: 1.2rem;
+    background-color: #a3d65c;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .task-input button:hover {
+    background-color: #a3d65c;
+  }
+
+  #task-list li {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+  }
+
+  .btn {
+    background-color: #a3d65c;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+  .btn:hover {
+    background-color: #8bb43f;
+  }
+</style>
