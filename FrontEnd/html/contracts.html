@@ -1,181 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forecasts</title>
-    <link rel="stylesheet" href="resources/sheet.css"> <!-- CSS existente -->
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: grid;
-            grid-template-areas:
-                "header header"
-                "aside main";
-            grid-template-rows: auto 1fr;
-            grid-template-columns: 250px 1fr;
-            height: 100vh;
-        }
-
-        header {
-            grid-area: header;
-            background-color: #a3d65c;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        aside {
-            grid-area: aside;
-            background-color: #f4f4f4;
-            padding: 1rem;
-        }
-
-        aside ul {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-        }
-
-        aside ul li {
-            margin: 1rem 0;
-        }
-
-        aside ul li a {
-            display: block;
-            padding: 10px 20px;
-            margin: 10px 0;
-            text-decoration: none;
-            color: #fff;
-            background-color: #a3d65c;
-            border-radius: 8px;
-            transition: background-color 0.3s, color 0.3s;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        aside ul li a:hover {
-            background-color: #8bb43f;
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        main {
-            grid-area: main;
-            padding: 1rem;
-            overflow: auto;
-        }
-
-        .table-container {
-            display: flex;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f4f4f4;
-        }
-
-        .table-cell {
-            flex: 0 0 auto;
-            padding: 10px;
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            text-align: center;
-            min-width: 150px; /* Ajustar según sea necesario */
-        }
-
-        .table-header {
-            background-color: #e0e0e0;
-            font-weight: bold;
-        }
-
-        .add-row-btn {
-            background-color: #a3d65c;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        .add-row-btn:hover {
-            background-color: #8bb43f;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contracts Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <?!= include("css/navigation"); ?>
+  <?!= include("css/contracts"); ?>
+  <base target="_top">
 </head>
 <body>
-    <header>
-        <h1>Forecasts</h1>
-    </header>
+  <header>
+    <h1>Contracts Overview</h1>
+    <div class="header-right">
+      Hello, <span id="username">User</span>
+    </div>
+  </header>
+  <div class="container">
     <aside>
-        <ul>
-            <li><a href="<?= createUrl('dashboard') ?>">Dashboard</a></li>
-            <li><a href="<?= createUrl('contracts') ?>">Contracts</a></li>
-            <li><a href="<?= createUrl('forecasts') ?>">Forecasts</a></li>
-            <li><a href="<?= createUrl('operations') ?>">Operations</a></li>
-        </ul>
+      <ul>
+        <li><a href="<?= createUrl('dashboard') ?>">Dashboard</a></li>
+        <li><a href="<?= createUrl('contracts') ?>">Contracts</a></li>
+        <li><a href="<?= createUrl('forecasts') ?>">Forecasts</a></li>
+        <li><a href="<?= createUrl('operations') ?>">Operations</a></li>
+      </ul>
     </aside>
     <main>
-        <div class="table-container">
-            <table id="forecast-table">
-                <thead>
-                    <tr>
-                        <th class="table-header">WEEK1</th>
-                        <th class="table-header">WEEK2</th>
-                        <th class="table-header">WEEK3</th>
-                        <th class="table-header">WEEK4</th>
-                        <th class="table-header">WEEK5</th>
-                        <th class="table-header">WEEK6</th>
-                        <th class="table-header">WEEK7</th>
-                        <th class="table-header">WEEK8</th>
-                        <th class="table-header">WEEK9</th>
-                        <th class="table-header">WEEK10</th>
-                        <!-- Añadir más semanas según sea necesario -->
-                    </tr>
-                </thead>
-                <tbody id="forecast-tbody">
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <button class="add-row-btn" onclick="addRow()">+</button>
+      <section class="content">
+        <h2>All Contracts</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Contract Number</th>
+              <th>Producer</th>
+              <th>Seller</th>
+              <th>Client</th>
+              <th>Product Summary</th>
+              <th>Total Weight</th>
+              <th>Total Price</th>
+              <th>PDF</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CN001</td>
+              <td>Producer 1</td>
+              <td>Seller 1</td>
+              <td>Client 1</td>
+              <td>Product 1, Product 2</td>
+              <td>1000 KG</td>
+              <td>10000 USD</td>
+              <td><a href="" class="pdf-link">PDF</a></td>
+            </tr>
+            <tr>
+              <td>CN002</td>
+              <td>Producer 2</td>
+              <td>Seller 2</td>
+              <td>Client 2</td>
+              <td>Product 3, Product 4</td>
+              <td>2000 KG</td>
+              <td>20000 USD</td>
+              <td><a href="" class="pdf-link">PDF</a></td>
+            </tr>
+            <!-- More rows as needed -->
+          </tbody>
+        </table>
+      </section>
+      <section class="sidebar">
+        <h2>Actions</h2>
+        <button class="action-button"><a href="<?= createUrl('contractsform') ?>">Create new PO/PI</a></button>
+        <button class="action-button"><a href="">Modify Contract</a></button>
+        <button class="action-button"><a href="">Authorizations</a></button>
+      </section>
     </main>
-
-    <script>
-        function addRow() {
-            const tbody = document.getElementById('forecast-tbody');
-            const newRow = document.createElement('tr');
-            for (let i = 0; i < 10; i++) { // Cambiar 10 por el número de semanas si es diferente
-                const newCell = document.createElement('td');
-                newRow.appendChild(newCell);
-            }
-            tbody.appendChild(newRow);
-        }
-    </script>
+  </div>
 </body>
 </html>
