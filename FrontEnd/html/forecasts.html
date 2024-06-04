@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecasts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="resources/sheet.css"> <!-- CSS existente -->
+    <style>
+        .roboto-mono {
+            font-family: "Roboto Mono", monospace;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal;
+        }
+        body {
+            margin: 0;
+            font-family: "Roboto Mono", sans-serif;
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "aside main";
+            grid-template-rows: auto 1fr;
+            grid-template-columns: 250px 1fr;
+            height: 100vh;
+        }
+        header {
+            grid-area: header;
+            background-color: #a3d65c;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        aside {
+            grid-area: aside;
+            background-color: #f4f4f4;
+            padding: 1rem;
+        }
+        aside ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        aside ul li {
+            margin: 1rem 0;
+        }
+        aside ul li a {
+            display: block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #fff;
+            background-color: #a3d65c;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        aside ul li a:hover {
+            background-color: #8bb43f;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        main {
+            grid-area: main;
+            padding: 1rem;
+            overflow: auto;
+        }
+        .table-container {
+            display: flex;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .table-cell {
+            flex: 0 0 auto;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            text-align: center;
+            min-width: 150px; /* Ajustar según sea necesario */
+        }
+        .table-header {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        .add-row-btn {
+            background-color: #a3d65c;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .add-row-btn:hover {
+            background-color: #8bb43f;
+        }
+        .container {
+            display: flex;
+        }
+        .filters {
+            margin-right: 20px;
+        }
+        .filters label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .filters input {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Forecasts</h1>
+    </header>
+    <aside>
+        <ul>
+            <li><a href="<?= createUrl('dashboard') ?>">Dashboard</a></li>
+            <li><a href="<?= createUrl('contracts') ?>">Contracts</a></li>
+            <li><a href="<?= createUrl('forecasts') ?>">Forecasts</a></li>
+            <li><a href="<?= createUrl('operations') ?>">Operations</a></li>
+        </ul>
+    </aside>
+    <main>
+        <div class="container">
+            <div class="filters">
+                <label for="contract">Contract N</label>
+                <input type="text" id="contract" name="contract">
+                <label for="client">Client</label>
+                <input type="text" id="client" name="client">
+                <label for="supplier">Supplier</label>
+                <input type="text" id="supplier" name="supplier">
+                <label for="buyer">Buyer</label>
+                <input type="text" id="buyer" name="buyer">
+                <label for="date1">Date1</label>
+                <input type="date" id="date1" name="date1">
+                <label for="date2">Date2</label>
+                <input type="date" id="date2" name="date2">
+            </div>
+            <div class="table-container">
+                <table id="forecast-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">WEEK1</th>
+                            <th class="table-header">WEEK2</th>
+                            <th class="table-header">WEEK3</th>
+                            <th class="table-header">WEEK4</th>
+                            <th class="table-header">WEEK5</th>
+                            <th class="table-header">WEEK6</th>
+                            <th class="table-header">WEEK7</th>
+                            <th class="table-header">WEEK8</th>
+                            <th class="table-header">WEEK9</th>
+                            <th class="table-header">WEEK10</th>
+                            <th class="table-header">WEEK11</th>
+                            <th class="table-header">WEEK12</th>
+                            <th class="table-header">WEEK13</th>
+                            <th class="table-header">WEEK14</th>
+                            <th class="table-header">WEEK15</th>
+                            <th class="table-header">WEEK16</th>
+                            <th class="table-header">WEEK17</th>
+                            <th class="table-header">WEEK18</th>
+                            <th class="table-header">WEEK19</th>
+                            <th class="table-header">WEEK20</th>
+                            <th class="table-header">WEEK21</th>
+                            <th class="table-header">WEEK22</th>
+                            <th class="table-header">WEEK23</th>
+                            <th class="table-header">WEEK24</th>
+                            <th class="table-header">WEEK25</th>
+                            <th class="table-header">WEEK26</th>
+                            <th class="table-header">WEEK27</th>
+                            <th class="table-header">WEEK28</th>
+                            <th class="table-header">WEEK29</th>
+                            <th class="table-header">WEEK30</th>
+                            <th class="table-header">WEEK31</th>
+                            <th class="table-header">WEEK32</th>
+                            <th class="table-header">WEEK33</th>
+                            <th class="table-header">WEEK34</th>
+                            <th class="table-header">WEEK35</th>
+                            <th class="table-header">WEEK36</th>
+                            <th class="table-header">WEEK37</th>
+                            <th class="table-header">WEEK38</th>
+                            <th class="table-header">WEEK39</th>
+                            <th class="table-header">WEEK40</th>
+                            <th class="table-header">WEEK41</th>
+                            <th class="table-header">WEEK42</th>
+                            <th class="table-header">WEEK43</th>
+                            <th class="table-header">WEEK44</th>
+                            <th class="table-header">WEEK45</th>
+                            <th class="table-header">WEEK46</th>
+                            <th class="table-header">WEEK47</th>
+                            <th class="table-header">WEEK48</th>
+                            <th class="table-header">WEEK49</th>
+                            <th class="table-header">WEEK50</th>
+                            <th class="table-header">WEEK51</th>
+                            <th class="table-header">WEEK52</th>
+                        </tr>
+                    </thead>
+                    <tbody id="forecast-tbody">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <button class="add-row-btn" onclick="addRow()">+</button>
+    </main>
+
+    <script>
+        function addRow() {
+            const tbody = document.getElementById('forecast-tbody');
+            const newRow = document.createElement('tr');
+            for (let i = 0; i < 52; i++) { // Cambiar 10 por el número de semanas si es diferente
+                const newCell = document.createElement('td');
+                newRow.appendChild(newCell);
+            }
+            tbody.appendChild(newRow);
+        }
+    </script>
+</body>
+</html>
