@@ -13,8 +13,10 @@
 </head>
 <body>
   <header>
-    <h1>PO/PI Forms</h1>
-    <div class="header-right">Hello ___</div>
+    <h1>Contract Form</h1>
+    <div class="header-right">
+      Hello, <span id="username">User</span>
+    </div>
   </header>
   <div class="container">
     <aside>
@@ -24,214 +26,105 @@
         <li><a href="<?= createUrl('forecasts') ?>">Forecasts</a></li>
         <li><a href="<?= createUrl('operations') ?>">Operations</a></li>
       </ul>
-    </aside>
+    </aside> 
     <main>
       <section class="content">
-        <h2>Purchase Order Form</h2>
-        <form id="po-form">
+        <h2>Contract Form</h2>
+        <form id="po-form" onsubmit="submitCreateForm(event)">
+
           <div class="form-row">
             <div class="form-column">
               <div class="form-group">
-                <label for="seller">Seller:</label>
-                <select id="seller" name="seller">
-                  <option value="seller1">Seller 1</option>
-                  <option value="seller2">Seller 2</option>
+                <label for="seller-po">Seller (PO):</label>
+                <select id="seller-po" name="seller-po">
+                  <!-- Options will be populated dynamically -->
                 </select>
               </div>
+            </div>
+            <div class="form-column">
               <div class="form-group">
-              </div> <!-- DONT ERASE -->
+                <label for="seller-pi">Seller (PI):</label>
+                <select id="seller-pi" name="seller-pi">
+                  <!-- Options will be populated dynamically -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-column">
               <div class="form-group">
+                <label for="client">Client:</label>
+                <select id="client" name="client">
+                  <!-- Options will be populated dynamically -->
+                </select>
               </div>
             </div>
             <div class="form-column">
               <div class="form-group">
                 <label for="agent-buyer">Agent/Buyer:</label>
                 <select id="agent-buyer" name="agent-buyer">
-                  <option value="agent1">Agent 1</option>
-                  <option value="agent2">Agent 2</option>
-                </select>
-              </div>
-              <div class="form-group">
-              </div> <!-- DONT ERASE -->
-              <div class="form-group">
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-column-full">
-              <div class="form-group">
-                <label for="client">Client:</label>
-                <select id="client" name="client">
-                  <option value="client1">Client 1</option>
-                  <option value="client2">Client 2</option>
+                  <!-- Options will be populated dynamically -->
                 </select>
               </div>
             </div>
           </div>
 
-          <h3>Products</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  Quantity
-                  <select id="weight-unit" onchange="updateTotals()">
-                    <option value="KG">KG</option>
-                    <option value="MT">MT</option>
-                  </select>
-                </th>
-                <th>Product</th>
-                <th>Packaging</th>
-                <th>
-                  Unit Price
-                  <select id="currency" onchange="updateTotals()">
-                    <option value="USD">USD</option>
-                    <option value="RUB">RUB</option>
-                    <option value="EURO">EURO</option>
-                  </select>
-                </th>
-                <th>Commission % from <select id="commission-type" name="commission-type">
-                  <option value="FOB">FOB</option>
-                  <option value="CIF">CIF</option>
-                </select></th>
-                <th>Total (<span id="total-currency">USD</span>)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input type="number" class="quantity" name="quantity1" oninput="updateTotals()"></td>
-                <td>
-                  <select class="product" name="product1">
-                    <option value="product1">Product 1</option>
-                    <option value="product2">Product 2</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="packaging" name="packaging1">
-                    <option value="packaging1">Packaging 1</option>
-                    <option value="packaging2">Packaging 2</option>
-                  </select>
-                </td>
-                <td><input type="number" class="unit-price" name="unit-price1" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="commission" name="commission1" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="total" name="total1" readonly></td>
-              </tr>
-              <tr>
-                <td><input type="number" class="quantity" name="quantity2" oninput="updateTotals()"></td>
-                <td>
-                  <select class="product" name="product2">
-                    <option value="product1">Product 1</option>
-                    <option value="product2">Product 2</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="packaging" name="packaging2">
-                    <option value="packaging1">Packaging 1</option>
-                    <option value="packaging2">Packaging 2</option>
-                  </select>
-                </td>
-                <td><input type="number" class="unit-price" name="unit-price2" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="commission" name="commission2" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="total" name="total2" readonly></td>
-              </tr>
-              <tr>
-                <td><input type="number" class="quantity" name="quantity3" oninput="updateTotals()"></td>
-                <td>
-                  <select class="product" name="product3">
-                    <option value="product1">Product 1</option>
-                    <option value="product2">Product 2</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="packaging" name="packaging3">
-                    <option value="packaging1">Packaging 1</option>
-                    <option value="packaging2">Packaging 2</option>
-                  </select>
-                </td>
-                <td><input type="number" class="unit-price" name="unit-price3" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="commission" name="commission3" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="total" name="total3" readonly></td>
-              </tr>
-              <tr>
-                <td><input type="number" class="quantity" name="quantity4" oninput="updateTotals()"></td>
-                <td>
-                  <select class="product" name="product4">
-                    <option value="product1">Product 1</option>
-                    <option value="product2">Product 2</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="packaging" name="packaging4">
-                    <option value="packaging1">Packaging 1</option>
-                    <option value="packaging2">Packaging 2</option>
-                  </select>
-                </td>
-                <td><input type="number" class="unit-price" name="unit-price4" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="commission" name="commission4" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="total" name="total4" readonly></td>
-              </tr>
-              <tr>
-                <td><input type="number" class="quantity" name="quantity5" oninput="updateTotals()"></td>
-                <td>
-                  <select class="product" name="product5">
-                    <option value="product1">Product 1</option>
-                    <option value="product2">Product 2</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="packaging" name="packaging5">
-                    <option value="packaging1">Packaging 1</option>
-                    <option value="packaging2">Packaging 2</option>
-                  </select>
-                </td>
-                <td><input type="number" class="unit-price" name="unit-price5" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="commission" name="commission5" step="0.01" oninput="updateTotals()"></td>
-                <td><input type="number" class="total" name="total5" readonly></td>
-              </tr>
-            </tbody>
-          </table>
-
+          <?!= include("html/contractsform/elements/product_table"); ?>
+          <?!= include("html/contractsform/elements/pricing_table"); ?>
+          
           <div class="totals">
             <div class="form-group">
               <label for="total-weight">Total Weight (<span id="weight-unit-label">KG</span>):</label>
               <input type="number" id="total-weight" name="total-weight" readonly>
             </div>
             <div class="form-group">
-              <label for="grand-total">Grand Total (<span id="grand-total-currency">USD</span>):</label>
-              <input type="number" id="grand-total" name="grand-total" readonly>
+              <label for="grand-total-po">Grand Total (PO) (<span id="grand-total-currency-po">USD</span>):</label>
+              <input type="number" id="grand-total-po" name="grand-total-po" readonly>
+            </div>
+            <div class="form-group">
+              <label for="grand-total-pi">Grand Total (PI) (<span id="grand-total-currency-pi">USD</span>):</label>
+              <input type="number" id="grand-total-pi" name="grand-total-pi" readonly>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="delivery-terms">Delivery Terms:</label>
-              <select id="delivery-terms" name="delivery-terms">
-                <option value="term1">Term 1</option>
-                <option value="term2">Term 2</option>
-              </select>
-            </div>
-            <div class="form-group">
               <label for="pol">POL:</label>
               <select id="pol" name="pol">
-                <option value="pol1">POL 1</option>
-                <option value="pol2">POL 2</option>
+                <!-- Options will be populated dynamically -->
               </select>
             </div>
             <div class="form-group">
               <label for="pod">POD:</label>
               <select id="pod" name="pod">
-                <option value="pod1">POD 1</option>
-                <option value="pod2">POD 2</option>
+                <!-- Options will be populated dynamically -->
               </select>
             </div>
             <div class="form-group">
               <label for="quality-requirement">Quality Requirement:</label>
               <select id="quality-requirement" name="quality-requirement">
-                <option value="quality1">Quality 1</option>
-                <option value="quality2">Quality 2</option>
+                <!-- Options will be populated dynamically -->
               </select>
             </div>
           </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="delivery-terms-po">Delivery Terms (PO):</label>
+              <select id="delivery-terms-po" name="delivery-terms-po">
+                <!-- Options will be populated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="delivery-terms-pi">Delivery Terms (PI):</label>
+              <select id="delivery-terms-pi" name="delivery-terms-pi">
+                <!-- Options will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <?!= include("html/contractsform/elements/terms_of_payment"); ?>
 
           <div class="form-row">
             <div class="form-column-full">
@@ -247,101 +140,37 @@
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-column-full">
-              <h3>Terms of Payment</h3>
-              <div class="form-group">
-                <label for="prepayment">Prepayment %:</label>
-                <input type="number" id="prepayment" name="prepayment" step="0.01">
-              </div>
-              <div class="form-group">
-                <label for="cad">CAD %:</label>
-                <input type="number" id="cad" name="cad" step="0.01">
-              </div>
-              <div class="form-group">
-                <label for="credit">Credit:</label>
-                <input type="number" id="credit" name="credit" step="0.01"> %
-                <input type="number" id="credit-days" name="credit-days"> days after
-                <select id="credit-days-type" name="credit-days-type">
-                  <option value="departure">departure</option>
-                  <option value="arrival">arrival</option>
-                </select>
-              </div>
-            </div>
+          <div class="form-group">
+            <label for="comments-po">Comments (PO):</label>
+            <textarea id="comments-po" name="comments-po" rows="4" cols="50"></textarea>
           </div>
 
           <div class="form-group">
-            <label for="comments">Comments:</label>
-            <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+            <label for="comments-pi">Comments (PI):</label>
+            <textarea id="comments-pi" name="comments-pi" rows="4" cols="50"></textarea>
           </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit">Send to Authorization</button>
         </form>
       </section>
-      <section class="sidebar">
-        <h2>Contract Options</h2>
-        <label for="contract-type">Area Selected:</label>
-        <select id="contract-type" name="contract-type" onchange="updateClientLabel()">
-          <option value="jc">JC</option>
-          <option value="fsf">F&SF</option>
-        </select>
-        <label for="contract-status">Contract Type:</label>
-        <select id="contract-status" name="contract-status" onchange="updateClientLabel()">
-          <option value="po">PO</option>
-          <option value="pi">PI</option>
-        </select>
-        <label for="contract-number">Get Data From Contract:</label>
-        <div class="contract-number-container">
-          <input type="text" id="contract-number" name="contract-number" placeholder="Contract Number">
-          <button>Search</button>
-        </div>
-      </section>
+      <?!= include("html/contractsform/elements/sidebar"); ?>
+
     </main>
   </div>
 
+  <!-- Scripts -->
+
+  <?!= include('html/contractsform/scripts/contract_creation_data') ?>
+  <?!= include('html/contractsform/scripts/event_listeners') ?>
+  <?!= include('html/contractsform/scripts/form_submission') ?>
+
+  <?!= include('html/contractsform/scripts/update_pricing_table') ?>
+  <?!= include('html/contractsform/scripts/update_product_names') ?>
+  <?!= include('html/contractsform/scripts/update_totals') ?>
+
   <script>
-    document.getElementById('currency').addEventListener('change', function() {
-      const currency = this.value;
-      document.getElementById('total-currency').textContent = currency;
-      document.getElementById('grand-total-currency').textContent = currency;
-      updateTotals();
-    });
-
-    document.getElementById('weight-unit').addEventListener('change', function() {
-      const unit = this.value;
-      document.getElementById('weight-unit-label').textContent = unit;
-      updateTotals();
-    });
-
-    function updateTotals() {
-      let grandTotal = 0;
-      let totalWeight = 0;
-
-      document.querySelectorAll('tbody tr').forEach(row => {
-        const quantity = parseFloat(row.querySelector('.quantity').value) || 0;
-        const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
-        const total = quantity * unitPrice;
-
-        row.querySelector('.total').value = total.toFixed(2);
-
-        grandTotal += total;
-        totalWeight += quantity;
-      });
-
-      document.getElementById('grand-total').value = grandTotal.toFixed(2);
-      document.getElementById('total-weight').value = totalWeight.toFixed(2);
-    }
-
-    function updateClientLabel() {
-      const contractStatus = document.getElementById('contract-status').value;
-      const clientLabel = document.querySelector('label[for="client"]');
-
-      if (contractStatus === 'pi') {
-        clientLabel.textContent = 'Producer:';
-      } else {
-        clientLabel.textContent = 'Client:';
-      }
-    }
+    updateTotals()
   </script>
+
 </body>
 </html>

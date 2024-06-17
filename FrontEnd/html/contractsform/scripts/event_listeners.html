@@ -1,0 +1,41 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.product').forEach(select => {
+      select.addEventListener('change', updateProductNames);
+      select.addEventListener('change', updatePricingTable);
+    });
+
+    document.getElementById('currency-po').addEventListener('change', function() {
+      const currency = this.value;
+      document.getElementById('total-currency-po').textContent = currency;
+      document.getElementById('grand-total-currency-po').textContent = currency;
+      updateTotals();
+    });
+
+    document.getElementById('currency-pi').addEventListener('change', function() {
+      const currency = this.value;
+      document.getElementById('total-currency-pi').textContent = currency;
+      document.getElementById('grand-total-currency-pi').textContent = currency;
+      updateTotals();
+    });
+
+    document.getElementById('weight-unit').addEventListener('change', function() {
+      const unit = this.value;
+      document.getElementById('weight-unit-label').textContent = unit;
+      updateTotals();
+    });
+
+    getContractCreationData(function(data) {
+      populateForm(data['jc']);
+    });
+
+    document.getElementById('contract-type').addEventListener('change', function() {
+      const area = this.value;
+      getContractCreationData(function(data) {
+        populateForm(data[area]);
+      });
+    });
+
+  });
+
+</script>

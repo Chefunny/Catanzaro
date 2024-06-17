@@ -1,0 +1,61 @@
+<script>
+  function getContractCreationData(callback) {
+    google.script.run.withSuccessHandler(callback).getContractCreationData();
+  }
+
+  function populateForm(data) {
+    populateSelect('seller-po', data.Sellers);
+    populateSelect('seller-pi', data.Buyers);
+    populateSelect('client', data.Clients);
+    populateSelect('agent-buyer', data.Buyers);
+    populateSelect('delivery-terms-po', data['Terms of Delivery']);
+    populateSelect('delivery-terms-pi', data['Terms of Delivery']);
+    populateSelect('pol', data['Ports of Loading']);
+    populateSelect('pod', data['Ports of Delivery']);
+    populateSelect('quality-requirement', data['Quality Requirements']);
+    populateSelect('commission-type', data['Comission Type']);
+
+    const productSelects = document.querySelectorAll('.product');
+    const packagingSelects = document.querySelectorAll('.packaging');
+
+    productSelects.forEach(select => {
+      const productOptions = data.Products.map(product => `<option value="${product.name}">${product.name}</option>`).join('');
+      select.innerHTML = productOptions;
+      select.value = 'None';
+    });
+
+    packagingSelects.forEach((select, index) => {
+      const selectedProduct = productSelects[index].value;
+      const product = data.Products.find(product => product.name === selectedProduct);
+      if (product) {
+        const packagingOptions = product.packages.map(packaging => `<option value="${packaging}">${packaging}</option>`).join('');
+        select.innerHTML = packagingOptions;
+      }
+    });
+  }
+
+  function updatePackagingOptions(productSelect) {
+    getContractCreationData(function(data) {
+      const area = document.getElementById('contract-type').value;
+      const selectedProduct = productSelect.value;
+      const product = data[area].Products.find(product => product.name === selectedProduct);
+      const packagingSelect = productSelect.closest('tr').querySelector('.packaging');
+      if (product) {
+        const packagingOptions = product.packages.map(packaging => `<option value="${packaging}">${packaging}</option>`).join('');
+        packagingSelect.innerHTML = packagingOptions;
+      }
+    });
+  }
+
+  function populateSelect(elementId, options) {
+    const select = document.getElementById(elementId);
+    const optionsHtml = options.map(option => `<option value="${option}">${option}</option>`).join('');
+    select.innerHTML = optionsHtml;
+  }
+
+  function updateCommissionLabel() {
+    const commissionType = document.getElementById('commission-type').value;
+    const commissionLabel = document.querySelector('th[for="commission"]');
+    commissionLabel.innerHTML = `Commission % from ${commissionType}`;
+  }
+</script>

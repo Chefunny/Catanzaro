@@ -15,7 +15,7 @@
   <header>
     <h1>Contracts Overview</h1>
     <div class="header-right">
-      Hello, <span id="username">User</span>
+      Hello, <span id="username"><?= Main()?></span>
     </div>
   </header>
   <div class="container">
@@ -40,7 +40,9 @@
               <th>Product Summary</th>
               <th>Total Weight</th>
               <th>Total Price</th>
-              <th>PDF</th>
+              <th>PO PDF</th>
+              <th>PI PDF</th>
+              <th>Modify</th>
             </tr>
           </thead>
           <tbody>
@@ -53,6 +55,8 @@
               <td>1000 KG</td>
               <td>10000 USD</td>
               <td><a href="" class="pdf-link">PDF</a></td>
+              <td><a href="" class="pdf-link">PDF</a></td>
+              <td><button class="modify-button"><a href="">Modify Contract</a></button></td>
             </tr>
             <tr>
               <td>CN002</td>
@@ -63,6 +67,8 @@
               <td>2000 KG</td>
               <td>20000 USD</td>
               <td><a href="" class="pdf-link">PDF</a></td>
+              <td><a href="" class="pdf-link">PDF</a></td>
+              <td><button class="modify-button"><a href="">Modify Contract</a></button></td>
             </tr>
             <!-- More rows as needed -->
           </tbody>
@@ -71,7 +77,6 @@
       <section class="sidebar">
         <h2>Actions</h2>
         <button class="action-button"><a href="<?= createUrl('contractsform') ?>">Create new PO/PI</a></button>
-        <button class="action-button"><a href="">Modify Contract</a></button>
         <button class="action-button"><a href="">Authorizations</a></button>
       </section>
     </main>

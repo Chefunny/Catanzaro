@@ -1,0 +1,18 @@
+<script>
+function updateProductNames() {
+    document.querySelectorAll('.products-table tbody tr').forEach((row, index) => {
+        const product = row.querySelector('.product').value;
+        const productNameElement = document.querySelector(`.pricing-table tbody tr:nth-child(${index + 1}) .product-name`);
+        if (productNameElement) {
+            productNameElement.textContent = product;
+        }
+    });
+}
+
+document.querySelectorAll('.product').forEach(select => {
+    select.addEventListener('change', () => {
+        updateProductNames();
+        updatePricingTable();
+    });
+});
+</script>

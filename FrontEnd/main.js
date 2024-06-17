@@ -19,3 +19,7 @@ function doGetTest() {
     return HtmlService.createTemplateFromFile("html/contracts.html")
     .evaluate()
 }
+
+function Main() {
+  return FLIB.getUser()
+}

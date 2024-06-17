@@ -1,0 +1,132 @@
+ <style>
+      .roboto-mono {
+        font-family: "Roboto Mono", monospace;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+      }
+      body {
+        margin: 0;
+        font-family: "Roboto Mono", sans-serif;
+        display: grid;
+        grid-template-areas:
+          "header header"
+          "aside main";
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 250px 1fr;
+        height: 100vh;
+      }
+      header {
+        grid-area: header;
+        background-color: #a3d65c;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+      aside {
+        grid-area: aside;
+        background-color: #f4f4f4;
+        padding: 1rem;
+      }
+      aside ul {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+      }
+      aside ul li {
+        margin: 1rem 0;
+      }
+      aside ul li a {
+        display: block;
+        padding: 10px 20px;
+        margin: 10px 0;
+        text-decoration: none;
+        color: #fff;
+        background-color: #a3d65c;
+        border-radius: 8px;
+        transition: background-color 0.3s, color 0.3s;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      aside ul li a:hover {
+        background-color: #8bb43f;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      main {
+        grid-area: main;
+        padding: 1rem;
+        overflow: auto;
+      }
+      .table-container {
+        display: flex;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      .table-cell {
+        flex: 0 0 auto;
+        padding: 10px;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        text-align: center;
+        min-width: 150px; /* Ajustar según sea necesario */
+      }
+      .table-header {
+        background-color: #e0e0e0;
+        font-weight: bold;
+      }
+      .add-row-btn {
+        background-color: #a3d65c;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .add-row-btn:hover {
+        background-color: #8bb43f;
+      }
+      .container {
+        display: flex;
+      }
+      .filters {
+        margin-right: 20px;
+      }
+      .filters label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .filters input {
+        margin-bottom: 10px;
+        width: 100%;
+      }
+      .table-container {
+        overflow-x: auto;
+      }
+      button {
+    padding: 0.75rem;
+    font-size: 1.2rem;
+    background-color: #a3d65c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 15%;
+  }
+</style>

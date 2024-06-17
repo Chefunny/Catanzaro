@@ -1,0 +1,38 @@
+<section class="sidebar">
+  <h2>Contract Options</h2>
+  <label for="contract-type">Area Selected:</label>
+  <select id="contract-type" name="contract-type" onchange="resetPricingTable()">
+    <option value="jc">JC</option>
+    <option value="fs">FS</option>
+  </select>
+  
+  <label for="contract-number">Get Data From Contract:</label>
+  <div class="contract-number-container">
+    <input type="text" id="contract-number" name="contract-number" placeholder="Contract Number">
+    <button>Search</button>
+  </div>
+
+  <h3>PI Options:</h3>
+  <label for="contract-include-producer">Producer:</label>
+  <select id="contract-include-producer" name="contract-include-producer">
+    <option value="include">Include Producer</option>
+    <option value="not_include">Do not include Producer</option>
+  </select>
+
+  <label for="producer-pi-number">Producer PI Number:</label>
+  <input type="text" id="producer-pi-number" name="producer-pi-number" placeholder="Producer PI Number">
+
+  <label for="client-pi-number">Client PI Number:</label>
+  <input type="text" id="client-pi-number" name="client-pi-number" placeholder="Client PI Number">
+
+<h3>Status Messages:</h3>
+<div id="po-error-container">
+  <h4>PO Status:</h4>
+  <ul id="po-error-messages"><li>Submit the form first!</li></ul>
+</div>
+<div id="pi-error-container">
+  <h4>PI Status:</h4>
+  <ul id="pi-error-messages"><li>Submit the form first!</li></ul>
+</div>
+
+</section>

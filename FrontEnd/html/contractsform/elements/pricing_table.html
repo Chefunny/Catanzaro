@@ -1,0 +1,72 @@
+<h3>Pricing</h3>
+<table class="pricing-table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>
+        Unit Price (PO)
+        <select id="currency-po" onchange="updateTotals()">
+          <option value="USD">USD</option>
+          <option value="RUB">RUB</option>
+          <option value="EURO">EURO</option>
+        </select>
+      </th>
+      <th>
+        Unit Price (PI)
+        <select id="currency-pi" onchange="updateTotals()">
+          <option value="USD">USD</option>
+          <option value="RUB">RUB</option>
+          <option value="EURO">EURO</option>
+        </select>
+      </th>
+      <th>Commission % from <select id="commission-type" name="commission-type">
+        <option value="FOB">FOB</option>
+        <option value="CIF">CIF</option>
+      </select></th>
+      <th>Total (PO) (<span id="total-currency-po">USD</span>)</th>
+      <th>Total (PI) (<span id="total-currency-pi">USD</span>)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="product-name">None</td>
+      <td><input type="number" class="unit-price-po" name="unit-price-po1" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="unit-price-pi" name="unit-price-pi1" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="commission" name="commission1" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="total-po" name="total-po1" readonly></td>
+      <td><input type="number" class="total-pi" name="total-pi1" readonly></td>
+    </tr>
+    <tr>
+      <td class="product-name">None</td>
+      <td><input type="number" class="unit-price-po" name="unit-price-po2" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="unit-price-pi" name="unit-price-pi2" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="commission" name="commission2" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="total-po" name="total-po2" readonly></td>
+      <td><input type="number" class="total-pi" name="total-pi2" readonly></td>
+    </tr>
+    <tr>
+      <td class="product-name">None</td>
+      <td><input type="number" class="unit-price-po" name="unit-price-po3" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="unit-price-pi" name="unit-price-pi3" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="commission" name="commission3" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="total-po" name="total-po3" readonly></td>
+      <td><input type="number" class="total-pi" name="total-pi3" readonly></td>
+    </tr>
+    <tr>
+      <td class="product-name">None</td>
+      <td><input type="number" class="unit-price-po" name="unit-price-po4" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="unit-price-pi" name="unit-price-pi4" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="commission" name="commission4" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="total-po" name="total-po4" readonly></td>
+      <td><input type="number" class="total-pi" name="total-pi4" readonly></td>
+    </tr>
+    <tr>
+      <td class="product-name">None</td>
+      <td><input type="number" class="unit-price-po" name="unit-price-po5" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="unit-price-pi" name="unit-price-pi5" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="commission" name="commission5" step="0.01" oninput="updateTotals()"></td>
+      <td><input type="number" class="total-po" name="total-po5" readonly></td>
+      <td><input type="number" class="total-pi" name="total-pi5" readonly></td>
+    </tr>
+  </tbody>
+</table>

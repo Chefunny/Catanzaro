@@ -1,0 +1,82 @@
+<script>
+function updatePricingTable() {
+    const productTable = document.querySelectorAll('.products-table tbody tr');
+    const pricingTableBody = document.querySelector('.pricing-table tbody');
+
+    // Get currently existing product names in the pricing table
+    const existingRows = Array.from(pricingTableBody.querySelectorAll('tr'));
+    const existingProducts = existingRows.map(row => row.querySelector('.product-name').textContent);
+
+    // Find the new set of products from the product table
+    const newProducts = Array.from(productTable).map(row => row.querySelector('.product').value).filter(product => product !== 'None');
+
+    // Remove rows for products no longer selected
+    existingRows.forEach((row, index) => {
+        const productName = row.querySelector('.product-name').textContent;
+        if (!newProducts.includes(productName)) {
+            pricingTableBody.removeChild(row);
+        }
+    });
+
+    // Add rows for new products not already in the pricing table
+    newProducts.forEach((product, index) => {
+        if (!existingProducts.includes(product)) {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td class="product-name">${product}</td>
+                <td>
+                    <input type="number" class="unit-price-po" name="unit-price-po${index + 1}" step="0.01" oninput="updateTotals()">
+                </td>
+                <td>
+                    <input type="number" class="unit-price-pi" name="unit-price-pi${index + 1}" step="0.01" oninput="updateTotals()">
+                </td>
+                <td>
+                    <input type="number" class="commission" name="commission${index + 1}" step="0.01" oninput="updateTotals()">
+                </td>
+                <td>
+                    <input type="number" class="total-po" name="total-po${index + 1}" readonly>
+                </td>
+                <td>
+                    <input type="number" class="total-pi" name="total-pi${index + 1}" readonly>
+                </td>
+            `;
+            pricingTableBody.appendChild(newRow);
+        }
+    });
+
+    // Update existing product names if they change
+    const updatedRows = Array.from(pricingTableBody.querySelectorAll('tr'));
+    updatedRows.forEach((row, index) => {
+        row.querySelector('.product-name').textContent = newProducts[index];
+    });
+}
+
+function resetPricingTable() {
+    const pricingTableBody = document.querySelector('.pricing-table tbody');
+    pricingTableBody.innerHTML = '';
+
+    for (let i = 1; i <= 5; i++) {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td class="product-name">None</td>
+            <td>
+                <input type="number" class="unit-price-po" name="unit-price-po${i}" step="0.01" oninput="updateTotals()">
+            </td>
+            <td>
+                <input type="number" class="unit-price-pi" name="unit-price-pi${i}" step="0.01" oninput="updateTotals()">
+            </td>
+            <td>
+                <input type="number" class="commission" name="commission${i}" step="0.01" oninput="updateTotals()">
+            </td>
+            <td>
+                <input type="number" class="total-po" name="total-po${i}" readonly>
+            </td>
+            <td>
+                <input type="number" class="total-pi" name="total-pi${i}" readonly>
+            </td>
+        `;
+        pricingTableBody.appendChild(newRow);
+    }
+}
+
+</script>

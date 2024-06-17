@@ -1,0 +1,83 @@
+<h3>Products</h3>
+<table class="products-table">
+  <thead>
+    <tr>
+      <th>
+        Quantity
+        <select id="weight-unit" onchange="updateTotals()">
+          <option value="KG">KG</option>
+          <option value="MT">MT</option>
+        </select>
+      </th>
+      <th>Product</th>
+      <th>Packaging</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="number" class="quantity" name="quantity1" oninput="updateTotals()"></td>
+      <td>
+        <select class="product" name="product1" onchange="updatePackagingOptions(this)">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+      <td>
+        <select class="packaging" name="packaging1">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="number" class="quantity" name="quantity2" oninput="updateTotals()"></td>
+      <td>
+        <select class="product" name="product2" onchange="updatePackagingOptions(this)">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+      <td>
+        <select class="packaging" name="packaging2">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="number" class="quantity" name="quantity3" oninput="updateTotals()"></td>
+      <td>
+        <select class="product" name="product3" onchange="updatePackagingOptions(this)">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+      <td>
+        <select class="packaging" name="packaging3">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="number" class="quantity" name="quantity4" oninput="updateTotals()"></td>
+      <td>
+        <select class="product" name="product4" onchange="updatePackagingOptions(this)">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+      <td>
+        <select class="packaging" name="packaging4">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="number" class="quantity" name="quantity5" oninput="updateTotals()"></td>
+      <td>
+        <select class="product" name="product5" onchange="updatePackagingOptions(this)">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+      <td>
+        <select class="packaging" name="packaging5">
+          <!-- Options will be populated dynamically -->
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,10 +1,19 @@
 {
   "timeZone": "America/Santiago",
-  "dependencies": {},
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "FLIB",
+        "libraryId": "1lIz87mB3htHjDqwaISQclyfWFultJoCeWfCQdugSvCFQnMqVNhTNFgqT",
+        "version": "0",
+        "developmentMode": true
+      }
+    ]
+  },
   "webapp": {
     "executeAs": "USER_ACCESSING",
-    "access": "ANYONE"
+    "access": "DOMAIN"
   }
 }

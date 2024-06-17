@@ -1,18 +1,28 @@
 function StatusHandler(response) {
 
-  var ui = SpreadsheetApp.getUi()
-  ui.alert(response)
+  console.log(response)
+
+  const responseCode = response.getResponseCode();
+  const responseText = response.getContentText();
+  const responseHeaders = response.getAllHeaders();
+
+  Logger.log('Response Code: ' + responseCode);
+  Logger.log('Response Text: ' + responseText);
+  Logger.log('Response Headers: ' + JSON.stringify(responseHeaders));
+
+
+
   var status_code = response.getContentText()
 
   if (status_code == "200") {
-    SpreadsheetApp.getUi().alert("Success!")
+    return "Success!"
   } else if (status_code == "405") {
-    SpreadsheetApp.getUi().alert("Error! Check Notifications")
+    return "Error! Check Notifications"
   } else if (status_code == "502") {
-    SpreadsheetApp.getUi().alert("Bad request")
+    return "Bad request"
   } else if (status_code == "404") {
-    SpreadsheetApp.getUi().alert("Incorrect PO number")
+    return "Incorrect PO number"
   } else {
-    SpreadsheetApp.getUi().alert("Unexpected system error")
+    return "Unexpected system error"
   }
 }
