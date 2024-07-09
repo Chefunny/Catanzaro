@@ -1,5 +1,5 @@
 <script>
-function updatePricingTable() {
+  function updatePricingTable() {
     const productTable = document.querySelectorAll('.products-table tbody tr');
     const pricingTableBody = document.querySelector('.pricing-table tbody');
 
@@ -49,9 +49,9 @@ function updatePricingTable() {
     updatedRows.forEach((row, index) => {
         row.querySelector('.product-name').textContent = newProducts[index];
     });
-}
+  }
 
-function resetPricingTable() {
+  function resetPricingTable() {
     const pricingTableBody = document.querySelector('.pricing-table tbody');
     pricingTableBody.innerHTML = '';
 
@@ -77,6 +77,6 @@ function resetPricingTable() {
         `;
         pricingTableBody.appendChild(newRow);
     }
-}
+  } 
 
 </script>

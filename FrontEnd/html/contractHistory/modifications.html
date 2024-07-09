@@ -1,0 +1,97 @@
+<script>
+  
+  function handlePdfClick(contractNumber, type, Version) {
+    google.script.run.withSuccessHandler(function(url) {
+      console.log(url)
+      if (url) {
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.target = '_blank';
+        anchor.click();
+      }
+    }).getPDF(contractNumber, type, Version);
+  }
+
+   function seeModifications(contractNumber, version) {
+    const contracts = JSON.parse(sessionStorage.getItem('contractHistoyData')).data;
+    const currentContract = contracts.find(contract => contract.contractNumber === contractNumber && contract.Version === version);
+    const previousContract = contracts.find(contract => contract.contractNumber === contractNumber && contract.Version === version - 1) || {};
+
+    const modifications = compareContracts(previousContract, currentContract);
+    displayModifications(modifications, version);
+  }
+
+  function compareContracts(prev, current) {
+    const changes = [];
+    const allKeys = new Set([...Object.keys(prev), ...Object.keys(current)]);
+    
+    allKeys.forEach(key => {
+      if (['contractNumber', 'Version', 'requester', 'authorizer', 'contractType', "creationDate", "piValid", "poValid"].includes(key)) {
+        return;
+      }
+
+      let prevValue = prev[key] || 'N/A';
+      let currentValue = current[key];
+
+      // Exclude fields with zero or empty string values
+      if (prevValue === 0 || prevValue === '' || currentValue === 0 || currentValue === '') {
+        return;
+      }
+
+      if (isISODate(prevValue)) {
+        prevValue = formatDate(prevValue);
+      }
+      if (isISODate(currentValue)) {
+        currentValue = formatDate(currentValue);
+      }
+
+      if (!prev.hasOwnProperty(key)) {
+        changes.push({
+          field: key,
+          oldValue: 'new',
+          newValue: currentValue
+        });
+      } else if (prevValue !== currentValue) {
+        changes.push({
+          field: key,
+          oldValue: prevValue,
+          newValue: currentValue
+        });
+      }
+    });
+    
+    return changes;
+  }
+
+  function displayModifications(modifications, version) {
+    const modal = document.getElementById('modificationsModal');
+    const modificationsContent = document.getElementById('modifications-content');
+    const currentVersionSpan = document.getElementById('current-version');
+
+    modificationsContent.innerHTML = '';
+    currentVersionSpan.textContent = version;
+
+    modifications.forEach(mod => {
+      const modText = `
+        <p><strong>${mod.field}:</strong> ${mod.oldValue} -> ${mod.newValue}</p>
+      `;
+      modificationsContent.innerHTML += modText;
+    });
+
+    modal.style.display = 'block';
+  }
+
+  function isISODate(value) {
+    const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
+    return isoDateRegex.test(value);
+  }
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+</script>

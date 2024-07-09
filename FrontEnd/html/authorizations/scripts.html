@@ -1,0 +1,64 @@
+<script>
+
+    document.addEventListener('DOMContentLoaded', initializePage);
+
+    async function initializePage() {
+      await loadContractCreationData();
+
+      document.getElementById('refreshButton').addEventListener('click', async () => {
+
+        const tableBody = document.getElementById('contracts-tbody');
+        tableBody.innerHTML = '';
+
+        await deleteAllDataExcept([])
+        await loadContractCreationData()
+        
+        const contractAuthorizationData = JSON.parse(sessionStorage.getItem('contractAuthorizationData'));
+        populateTable(contractAuthorizationData);
+      }) 
+    };
+
+    function populateTable(data) {
+      const tbody = document.getElementById('contracts-tbody');
+      tbody.innerHTML = '';
+
+      data.forEach(contract => {
+        const row = document.createElement('tr');
+        
+        const requesterCell = document.createElement('td');
+        requesterCell.textContent = contract.requester;
+        row.appendChild(requesterCell);
+
+        const typeCell = document.createElement('td');
+        typeCell.textContent = 'Contract Creation';
+        row.appendChild(typeCell);
+
+        const dateCell = document.createElement('td');
+        dateCell.textContent = formatDate(contract.requestDate);
+        row.appendChild(dateCell);
+
+        const actionCell = document.createElement('td');
+        const button = document.createElement('button');
+        button.className = 'authorization-button';
+        button.textContent = 'View Authorization';
+        button.onclick = function() {
+          sessionStorage.setItem('selectedContract', JSON.stringify(contract));
+          document.getElementById('view-authorization-link').click();
+        };
+        actionCell.appendChild(button);
+        row.appendChild(actionCell);
+
+        tbody.appendChild(row);
+      });
+    }
+
+    function formatDate(dateString) {
+      return dateString.split('T')[0];
+    }
+
+
+  window.onload = function() {
+      const contractAuthorizationData = JSON.parse(sessionStorage.getItem('contractAuthorizationData'));
+      populateTable(contractAuthorizationData);
+    };
+</script>

@@ -1,9 +1,7 @@
 <script>
-  function getContractCreationData(callback) {
-    google.script.run.withSuccessHandler(callback).getContractCreationData();
-  }
 
   function populateForm(data) {
+
     populateSelect('seller-po', data.Sellers);
     populateSelect('seller-pi', data.Buyers);
     populateSelect('client', data.Clients);
@@ -35,17 +33,17 @@
   }
 
   function updatePackagingOptions(productSelect) {
-    getContractCreationData(function(data) {
-      const area = document.getElementById('contract-type').value;
-      const selectedProduct = productSelect.value;
-      const product = data[area].Products.find(product => product.name === selectedProduct);
-      const packagingSelect = productSelect.closest('tr').querySelector('.packaging');
-      if (product) {
-        const packagingOptions = product.packages.map(packaging => `<option value="${packaging}">${packaging}</option>`).join('');
-        packagingSelect.innerHTML = packagingOptions;
-      }
-    });
+    const contractCreationData = JSON.parse(sessionStorage.getItem('contractCreationData'));
+    const area = document.getElementById('contract-type').value;
+    const selectedProduct = productSelect.value;
+    const product = contractCreationData[area].Products.find(product => product.name === selectedProduct);
+    const packagingSelect = productSelect.closest('tr').querySelector('.packaging');
+    if (product) {
+      const packagingOptions = product.packages.map(packaging => `<option value="${packaging}">${packaging}</option>`).join('');
+      packagingSelect.innerHTML = packagingOptions;
+    }
   }
+
 
   function populateSelect(elementId, options) {
     const select = document.getElementById(elementId);
@@ -58,4 +56,5 @@
     const commissionLabel = document.querySelector('th[for="commission"]');
     commissionLabel.innerHTML = `Commission % from ${commissionType}`;
   }
+
 </script>

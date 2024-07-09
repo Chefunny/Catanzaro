@@ -1,0 +1,16 @@
+<script>
+  
+function deleteAllDataExcept(keepKeys) {
+    var deleted_count = 0;
+    const keysToKeep = new Set(keepKeys);
+    for (let i = sessionStorage.length - 1; i >= 0; i--) {
+      const key = sessionStorage.key(i);
+      if (!keysToKeep.has(key)) {
+        sessionStorage.removeItem(key);
+      }
+    }
+    console.log('sessionStorage cleaned, keeping only:', keepKeys);
+    console.log("deleted: ", deleted_count)
+  }
+
+</script>

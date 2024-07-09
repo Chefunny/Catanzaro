@@ -1,0 +1,104 @@
+<script>
+
+  function submitCreateForm(event) {
+    event.preventDefault();
+
+    const action = event.submitter.value
+    
+    if (action == "reject") {
+
+      rejectContract(handleReject, formObject)
+
+    } else if (action == "approve") {
+
+      const form = document.getElementById("po-form");
+      const formData = new FormData(form);
+      const formObject = Object.fromEntries(formData.entries());
+
+      // Get additional PI Options data
+      const contractIncludeProducer = document.getElementById("contract-include-producer").value;
+      const producerPINumber = document.getElementById("producer-pi-number").value;
+      const clientPINumber = document.getElementById("client-pi-number").value;
+
+      // Add PI Options data to formObject
+      formObject["contract-include-producer"] = contractIncludeProducer;
+      formObject["producer-pi-number"] = producerPINumber;
+      formObject["client-pi-number"] = clientPINumber;
+
+      // Get additional data for weight-unit and currencies
+      const weightUnit = document.getElementById("weight-unit").value;
+      const currencyPO = document.getElementById("currency-po").value;
+      const currencyPI = document.getElementById("currency-pi").value;
+      const sessionId = document.getElementById("session_id").value;
+      const requester = document.getElementById("requester").value;
+
+      // Existing contract modification
+      const contractNumber = document.getElementById("contractNumber").value;
+
+      if (contractNumber) {
+        formObject["contractNumber"] = contractNumber
+      }
+
+      // Add additional data to formObject
+      formObject["weight-unit"] = weightUnit;
+      formObject["currency-po"] = currencyPO;
+      formObject["currency-pi"] = currencyPI;
+      formObject["sessionId"] = sessionId;
+      formObject['requester'] = requester;
+
+      console.log(formObject);
+
+      checkContractCreation(handleValidationResult, formObject);
+    }
+  }
+
+  function checkContractCreation(callback, formData) {
+    google.script.run.withSuccessHandler(callback).AuthorizeContractHandler(formData);
+  }
+
+function handleValidationResult(result) {
+  const poErrorContainer = document.getElementById('po-error-messages');
+  const piErrorContainer = document.getElementById('pi-error-messages');
+
+  poErrorContainer.innerHTML = '';
+  piErrorContainer.innerHTML = '';
+
+  if (!result.valid_po) {
+    result.errors_po.forEach(error => {
+      const errorItem = document.createElement('li');
+      errorItem.textContent = error;
+      poErrorContainer.appendChild(errorItem);
+    });
+  } else {
+    const successItem = document.createElement('li');
+    successItem.textContent = "PO is valid, sent to contract creation!";
+    poErrorContainer.appendChild(successItem);
+  }
+
+  if (!result.valid_pi) {
+    result.errors_pi.forEach(error => {
+      const errorItem = document.createElement('li');
+      errorItem.textContent = error;
+      piErrorContainer.appendChild(errorItem);
+    });
+  } else {
+    const successItem = document.createElement('li');
+    successItem.textContent = "PI is valid, sent to contract creation!";
+    piErrorContainer.appendChild(successItem);
+  }
+}
+
+  function rejectContract(callback, formData) {
+    google.script.run.withSuccessHandler(callback).RejectContractAuth(formData)
+  }
+
+  function handleReject(result){
+    if (result.statusCode == 200){
+      alert("Success! Authorization Rejected!")
+    } else {
+      alert(`Error with response statusCode: ${result.statusCode}`)
+    }
+  }
+
+
+</script>

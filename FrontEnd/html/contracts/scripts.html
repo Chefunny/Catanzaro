@@ -1,0 +1,172 @@
+<script>
+function loadContractsToPage() {
+
+    const jsonData = JSON.parse(sessionStorage.getItem("getContractData"));
+    const tableBody = document.getElementById('contractTableBody');
+
+    jsonData.data.forEach(contract => {
+        const row = document.createElement('tr');
+
+        let products = [];
+        for (let i = 1; i <= 5; i++) {
+            if (contract[`product${i}`]) {
+                products.push(contract[`product${i}`]);
+            }
+        }
+
+        const total_po = contract["grand-total-po"] || "None";
+        const total_pi = contract["grand-total-pi"] || "None";
+
+        // Contract number button cell
+        const contractNumberCell = document.createElement('td');
+        const contractNumberButton = document.createElement('button');
+        contractNumberButton.className = 'contract-number-button';
+        contractNumberButton.dataset.contractNumber = contract.contractNumber;
+        contractNumberButton.textContent = contract.contractNumber;
+        contractNumberButton.onclick = function() {
+          sessionStorage.setItem('selectedContract', JSON.stringify(contract));
+          document.getElementById('view-contract-history').click();
+        };
+
+        contractNumberCell.appendChild(contractNumberButton);
+        row.appendChild(contractNumberCell);
+
+        // Seller cell
+        const sellerCell = document.createElement('td');
+        sellerCell.textContent = contract["seller-po"];
+        row.appendChild(sellerCell);
+
+        // Agent buyer cell
+        const agentBuyerCell = document.createElement('td');
+        agentBuyerCell.textContent = contract["agent-buyer"];
+        row.appendChild(agentBuyerCell);
+
+        // Client cell
+        const clientCell = document.createElement('td');
+        clientCell.textContent = contract.client;
+        row.appendChild(clientCell);
+
+        // Products cell
+        const productsCell = document.createElement('td');
+        productsCell.textContent = products.join(', ');
+        row.appendChild(productsCell);
+
+        // Total weight cell
+        const totalWeightCell = document.createElement('td');
+        totalWeightCell.textContent = `${contract["total-weight"]} ${contract["weight-unit"]}`;
+        row.appendChild(totalWeightCell);
+
+        // Total PO cell
+        const totalPoCell = document.createElement('td');
+        totalPoCell.textContent = `${total_po} ${contract["currency-po"]}`;
+        row.appendChild(totalPoCell);
+
+        // Total PI cell
+        const totalPiCell = document.createElement('td');
+        totalPiCell.textContent = `${total_pi} ${contract["currency-pi"]}`;
+        row.appendChild(totalPiCell);
+
+        // PDF button PO cell
+        const pdfButtonPoCell = document.createElement('td');
+        const pdfButtonPo = document.createElement('button');
+        pdfButtonPo.className = 'pdf-button-po';
+        pdfButtonPo.dataset.contractNumber = contract.contractNumber;
+        pdfButtonPo.dataset.version = contract.Version;
+
+        if (contract.poValid) {
+          pdfButtonPo.textContent = 'Generate PDF';
+        } else {
+          pdfButtonPo.textContent = "PO PDF Unavailable"
+          pdfButtonPo.disabled = true;
+        }
+
+        pdfButtonPoCell.appendChild(pdfButtonPo);
+        row.appendChild(pdfButtonPoCell);
+
+        // PDF button PI cell
+        const pdfButtonPiCell = document.createElement('td');
+        const pdfButtonPi = document.createElement('button');
+        pdfButtonPi.className = 'pdf-button-pi';
+        pdfButtonPi.dataset.contractNumber = contract.contractNumber;
+        pdfButtonPi.dataset.version = contract.Version;
+
+        if (contract.piValid) {
+          pdfButtonPi.textContent = 'Generate PDF';
+        } else {
+          pdfButtonPi.textContent = "PI PDF Unavailable"
+          pdfButtonPi.disabled = true;
+        }
+
+        pdfButtonPiCell.appendChild(pdfButtonPi);
+        row.appendChild(pdfButtonPiCell);
+
+        // Modify button cell
+        const modifyButtonCell = document.createElement('td');
+        const modifyButton = document.createElement('button');
+        modifyButton.className = 'modify-button';
+        modifyButton.textContent = 'Modify Contract';
+        modifyButtonCell.appendChild(modifyButton);
+        row.appendChild(modifyButtonCell);
+
+        tableBody.appendChild(row);
+    });
+
+      const pdfButtonsPo = document.querySelectorAll('.pdf-button-po');
+      pdfButtonsPo.forEach(button => {
+          button.addEventListener('click', (event) => {
+              const contractNumber = event.target.getAttribute('data-contract-number');
+              const version = event.target.getAttribute('data-version');
+              handlePdfClick(contractNumber, "PO", version);
+          });
+      });
+
+      const pdfButtonsPi = document.querySelectorAll('.pdf-button-pi');
+      pdfButtonsPi.forEach(button => {
+          button.addEventListener('click', (event) => {
+              const contractNumber = event.target.getAttribute('data-contract-number');
+              const version = event.target.getAttribute('data-version');
+              handlePdfClick(contractNumber, "PI", version);
+          });
+      });
+
+
+
+    }
+
+
+    function handlePdfClick(contractNumber, type, Version) {
+      google.script.run.withSuccessHandler(function(url) {
+        console.log(url)
+        if (url) {
+          const anchor = document.createElement('a');
+          anchor.href = url;
+          anchor.target = '_blank';
+          anchor.click();
+        }
+      }).getPDF(contractNumber, type, Version);
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await initializePage()
+      loadContractsToPage()
+
+      document.getElementById('refreshButton').addEventListener('click', async () => {
+
+        const tableBody = document.getElementById('contractTableBody');
+        tableBody.innerHTML = '';
+
+        await deleteAllDataExcept([])
+        await loadContractMain()
+
+        loadContractsToPage()
+        initializePage()
+      });
+    });
+
+    async function initializePage() {
+      await loadContractMain()
+      await loadContractCreationData();
+    }
+
+    
+</script>

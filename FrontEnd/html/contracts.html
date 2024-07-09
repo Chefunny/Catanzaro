@@ -10,12 +10,18 @@
   <?!= include("css/navigation"); ?>
   <?!= include("css/contracts"); ?>
   <base target="_top">
+
+  <?!= include("data/common_scripts/fetchData") ?>
+  <?!= include("data/common_scripts/deleteData") ?>
+
+  <?!= include("data/specific/contracts") ?>
+
 </head>
 <body>
   <header>
     <h1>Contracts Overview</h1>
     <div class="header-right">
-      Hello, <span id="username"><?= Main()?></span>
+      Hello, <span id="username"><?= getUser()['name'].split(" ")[0]?>!</span>
     </div>
   </header>
   <div class="container">
@@ -30,7 +36,7 @@
     <main>
       <section class="content">
         <h2>All Contracts</h2>
-        <table>
+        <table id="contractTable">
           <thead>
             <tr>
               <th>Contract Number</th>
@@ -39,46 +45,28 @@
               <th>Client</th>
               <th>Product Summary</th>
               <th>Total Weight</th>
-              <th>Total Price</th>
+              <th>Total Price PO</th>
+              <th>Total Price PI</th>
               <th>PO PDF</th>
               <th>PI PDF</th>
               <th>Modify</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>CN001</td>
-              <td>Producer 1</td>
-              <td>Seller 1</td>
-              <td>Client 1</td>
-              <td>Product 1, Product 2</td>
-              <td>1000 KG</td>
-              <td>10000 USD</td>
-              <td><a href="" class="pdf-link">PDF</a></td>
-              <td><a href="" class="pdf-link">PDF</a></td>
-              <td><button class="modify-button"><a href="">Modify Contract</a></button></td>
-            </tr>
-            <tr>
-              <td>CN002</td>
-              <td>Producer 2</td>
-              <td>Seller 2</td>
-              <td>Client 2</td>
-              <td>Product 3, Product 4</td>
-              <td>2000 KG</td>
-              <td>20000 USD</td>
-              <td><a href="" class="pdf-link">PDF</a></td>
-              <td><a href="" class="pdf-link">PDF</a></td>
-              <td><button class="modify-button"><a href="">Modify Contract</a></button></td>
-            </tr>
-            <!-- More rows as needed -->
+          <tbody id="contractTableBody">
           </tbody>
         </table>
       </section>
+
+      <?!= include("html/contracts/scripts") ?>
+
+
       <section class="sidebar">
         <h2>Actions</h2>
         <button class="action-button"><a href="<?= createUrl('contractsform') ?>">Create new PO/PI</a></button>
-        <button class="action-button"><a href="">Authorizations</a></button>
+        <button class="action-button"><a href="<?= createUrl('authorizations') ?>">Authorizations</a></button>
+        <button class="action-button" id="refreshButton">Refresh Contracts</button>
       </section>
+      <a id="view-contract-history" href="<?= createUrl('contractHistory')?>" style="display:none;"></a>
     </main>
   </div>
 </body>

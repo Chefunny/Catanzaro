@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract Version History</title>
+
+    <?!= include("css/navigation"); ?>
+    <?!= include("css/contracts"); ?>
+    <?!= include("css/contractHistory") ?>
+
+    <?!= include("data/specific/contractHistory"); ?>
+
+    <?!= include("html/contractHistory/scripts"); ?>
+    <?!= include("html/contractHistory/modifications"); ?>
+    
+
+    <base target="_top">
+</head>
+<body>
+  <header>
+    <h1>Contract Version History</h1>
+    <div class="header-right">
+      Hello, <span id="username"><?= getUser()['name'].split(" ")[0]?>!</span>
+    </div>
+  </header>
+  <div class="container">
+    <aside>
+      <ul>
+        <li><a href="<?= createUrl('dashboard') ?>">Dashboard</a></li>
+        <li><a href="<?= createUrl('contracts') ?>">Contracts</a></li>
+        <li><a href="<?= createUrl('forecasts') ?>">Forecasts</a></li>
+        <li><a href="<?= createUrl('operations') ?>">Operations</a></li>
+      </ul>
+    </aside>
+    <main>
+
+      <div id="contract-history-container"></div>
+
+      <div id="modificationsModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Modifications (Version <span id="current-version"></span>)</h2>
+          <div id="modifications-content"></div>
+        </div>
+      </div>
+
+      <section class="sidebar">
+        <h2>Actions</h2>
+        <button class="action-button"><a href="<?= createUrl('contracts') ?>">Go Back</a></button>
+      </section>
+      <a id="view-contract-history" href="<?= createUrl('contractHistory')?>" style="display:none;"></a>
+    </main>
+  </div>
+</body>
+</html>

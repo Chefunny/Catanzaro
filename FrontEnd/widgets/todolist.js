@@ -43,8 +43,3 @@ function removeFromList(todo_element_id) {
   }
   RequestNew(options)
 }
-
-function JSON_to_List(JSON) {
-
-  
-}

@@ -2,9 +2,6 @@ function doPost(e) {
 
   const requestData = JSON.parse(e.postData.contents);
   const full_route = requestData['route']
-
-  const range = SpreadsheetApp.openById("1oCdKUozjunj-E31A1KgW212-iU0WOtS5Ly6Ip6bngoM").getSheetByName("Contracts").getRange("A5")
-  range.setValue("hello")
   
   const section = full_route.split("/")[0]
 
@@ -15,8 +12,11 @@ function doPost(e) {
   } 
   
   else {
-    out_params = 502;
+    out_params = {
+      'data': "Routing Error",
+      "statusCode": 404
+    }
   }
 
-  return ContentService.createTextOutput(out_params).setMimeType(ContentService.MimeType.JSON)
+  return ContentService.createTextOutput(JSON.stringify(out_params)).setMimeType(ContentService.MimeType.JSON);
 }

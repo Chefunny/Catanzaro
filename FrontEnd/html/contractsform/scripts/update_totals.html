@@ -1,34 +1,34 @@
 <script>
-function updateTotals() {
-    let grandTotalPO = 0;
-    let grandTotalPI = 0;
-    let totalWeight = 0;
+  function updateTotals() {
+      let grandTotalPO = 0;
+      let grandTotalPI = 0;
+      let totalWeight = 0;
 
-    document.querySelectorAll('.products-table tbody tr').forEach((row, index) => {
-        const quantity = parseFloat(row.querySelector('.quantity').value) || 0;
-        const unitPricePOElement = document.querySelector(`.pricing-table tbody tr:nth-child(${index + 1}) .unit-price-po`);
-        const unitPricePIElement = document.querySelector(`.pricing-table tbody tr:nth-child(${index + 1}) .unit-price-pi`);
-        const totalPOElement = document.querySelector(`.pricing-table tbody tr:nth-child(${index + 1}) .total-po`);
-        const totalPIElement = document.querySelector(`.pricing-table tbody tr:nth-child(${index + 1}) .total-pi`);
+      document.querySelectorAll('.products-table tbody tr').forEach((row, index) => {
+          const quantity = parseFloat(row.querySelector('.quantity').value) || 0;
+          const unitPricePOElement = document.querySelector(`.pricing-table tbody tr:nth-child(${index + 1}) .unit-price-po`);
+          const unitPricePIElement = document.querySelector(`.pricing-table tbody tr:nth-child(${index + 1}) .unit-price-pi`);
+          const totalPOElement = document.querySelector(`.pricing-table tbody tr:nth-child(${index + 1}) .total-po`);
+          const totalPIElement = document.querySelector(`.pricing-table tbody tr:nth-child(${index + 1}) .total-pi`);
 
-        if (unitPricePOElement && unitPricePIElement && totalPOElement && totalPIElement) {
-            const unitPricePO = parseFloat(unitPricePOElement.value) || 0;
-            const unitPricePI = parseFloat(unitPricePIElement.value) || 0;
+          if (unitPricePOElement && unitPricePIElement && totalPOElement && totalPIElement) {
+              const unitPricePO = parseFloat(unitPricePOElement.value) || 0;
+              const unitPricePI = parseFloat(unitPricePIElement.value) || 0;
 
-            const totalPO = quantity * unitPricePO;
-            const totalPI = quantity * unitPricePI;
+              const totalPO = quantity * unitPricePO;
+              const totalPI = quantity * unitPricePI;
 
-            totalPOElement.value = totalPO.toFixed(2);
-            totalPIElement.value = totalPI.toFixed(2);
+              totalPOElement.value = totalPO.toFixed(2);
+              totalPIElement.value = totalPI.toFixed(2);
 
-            grandTotalPO += totalPO;
-            grandTotalPI += totalPI;
-            totalWeight += quantity;
-        }
-    });
+              grandTotalPO += totalPO;
+              grandTotalPI += totalPI;
+              totalWeight += quantity;
+          }
+      });
 
-    document.getElementById('grand-total-po').value = grandTotalPO.toFixed(2);
-    document.getElementById('grand-total-pi').value = grandTotalPI.toFixed(2);
-    document.getElementById('total-weight').value = totalWeight.toFixed(2);
-}
+      document.getElementById('grand-total-po').value = grandTotalPO.toFixed(2);
+      document.getElementById('grand-total-pi').value = grandTotalPI.toFixed(2);
+      document.getElementById('total-weight').value = totalWeight.toFixed(2);
+  }
 </script>

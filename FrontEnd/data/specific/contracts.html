@@ -1,0 +1,41 @@
+<script>
+
+  function getContractData() {
+    return new Promise((resolve, reject) => {
+      google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).getContractData();
+    });
+  }
+
+  function getContractCreationData() {
+    return new Promise((resolve, reject) => {
+      google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).getContractCreationData();
+    });
+  }
+
+  function getContractAuthorizationData() {
+    return new Promise((resolve, reject) => {
+      google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).getContractAuthorizationData();
+    });
+  }
+
+  async function loadContractCreationData() {
+
+    const functionList = [getContractCreationData, getContractAuthorizationData];
+    const functionNameList = ["getContractData", 'contractCreationData', 'contractAuthorizationData'];
+
+    deleteAllDataExcept(functionNameList)
+
+    functionNameList.shift() // remove first element
+    await fetchLoadData(functionList, functionNameList);
+  }
+
+  async function loadContractMain() {
+
+    const functionList = [getContractData];
+    const functionNameList = ["getContractData"];
+
+    await fetchLoadData(functionList, functionNameList);
+
+  }
+
+</script>

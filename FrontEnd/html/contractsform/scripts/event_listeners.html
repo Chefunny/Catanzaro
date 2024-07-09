@@ -1,5 +1,11 @@
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+
+  async function initializePage() {
+    await loadContractCreationData();
+
+    const contractCreationData = JSON.parse(sessionStorage.getItem('contractCreationData'));
+    populateForm(contractCreationData['jc']); // Use data from sessionStorage
+
     document.querySelectorAll('.product').forEach(select => {
       select.addEventListener('change', updateProductNames);
       select.addEventListener('change', updatePricingTable);
@@ -25,17 +31,20 @@
       updateTotals();
     });
 
-    getContractCreationData(function(data) {
-      populateForm(data['jc']);
-    });
-
     document.getElementById('contract-type').addEventListener('change', function() {
       const area = this.value;
-      getContractCreationData(function(data) {
-        populateForm(data[area]);
-      });
+      const contractCreationData = JSON.parse(sessionStorage.getItem('contractCreationData'));
+      populateForm(contractCreationData[area]); // Use data from sessionStorage
     });
 
-  });
+    document.querySelectorAll('.product').forEach(select => {
+      select.addEventListener('change', () => {
+          updateProductNames();
+          updatePricingTable();
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initializePage);
 
 </script>

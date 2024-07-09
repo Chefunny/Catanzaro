@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contract Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <?!= include("css/navigation"); ?>
+  <?!= include("css/contractsform"); ?>
+  <base target="_top">
+
+  <?!= include("data/common_scripts/fetchData") ?>
+  <?!= include("data/common_scripts/deleteData") ?>
+
+  <?!= include("data/specific/contractAuthorization") ?>
+
+</head>
+<body>
+  <header>
+    <h1>Contract Authorization</h1>
+    <div class="header-right">
+        Hello, <span id="username"><?= getUser()['name'].split(" ")[0]?>!</span>
+    </div>
+  </header>
+  <div class="container">
+    <aside>
+      <ul>
+        <li><a href="<?= createUrl('dashboard') ?>">Dashboard</a></li>
+        <li><a href="<?= createUrl('contracts') ?>">Contracts</a></li>
+        <li><a href="<?= createUrl('forecasts') ?>">Forecasts</a></li>
+        <li><a href="<?= createUrl('operations') ?>">Operations</a></li>
+      </ul>
+    </aside> 
+    <main>
+      <section class="content">
+        <h2>Authorization</h2>
+        <form id="po-form" onsubmit="submitCreateForm(event)">
+          <div class="form-row">
+            <div class="form-column">
+              <div class="form-group">
+                <label for="seller-po">Seller (PO):</label>
+                <select id="seller-po" name="seller-po">
+                  <!-- Options will be populated dynamically -->
+                </select>
+              </div>
+            </div>
+            <div class="form-column">
+              <div class="form-group">
+                <label for="seller-pi">Seller (PI):</label>
+                <select id="seller-pi" name="seller-pi">
+                  <!-- Options will be populated dynamically -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-column">
+              <div class="form-group">
+                <label for="client">Client:</label>
+                <select id="client" name="client">
+                  <!-- Options will be populated dynamically -->
+                </select>
+              </div>
+            </div>
+            <div class="form-column">
+              <div class="form-group">
+                <label for="agent-buyer">Agent/Buyer:</label>
+                <select id="agent-buyer" name="agent-buyer">
+                  <!-- Options will be populated dynamically -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <?!= include("html/contractsform/elements/product_table"); ?>
+          <?!= include("html/contractsform/elements/pricing_table"); ?>
+          
+          <div class="totals">
+            <div class="form-group">
+              <label for="total-weight">Total Weight (<span id="weight-unit-label">KG</span>):</label>
+              <input type="number" id="total-weight" name="total-weight" readonly>
+            </div>
+            <div class="form-group">
+              <label for="grand-total-po">Grand Total (PO) (<span id="grand-total-currency-po">USD</span>):</label>
+              <input type="number" id="grand-total-po" name="grand-total-po" readonly>
+            </div>
+            <div class="form-group">
+              <label for="grand-total-pi">Grand Total (PI) (<span id="grand-total-currency-pi">USD</span>):</label>
+              <input type="number" id="grand-total-pi" name="grand-total-pi" readonly>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pol">POL:</label>
+              <select id="pol" name="pol">
+                <!-- Options will be populated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pod">POD:</label>
+              <select id="pod" name="pod">
+                <!-- Options will be populated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quality-requirement">Quality Requirement:</label>
+              <select id="quality-requirement" name="quality-requirement">
+                <!-- Options will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="delivery-terms-po">Delivery Terms (PO):</label>
+              <select id="delivery-terms-po" name="delivery-terms-po">
+                <!-- Options will be populated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="delivery-terms-pi">Delivery Terms (PI):</label>
+              <select id="delivery-terms-pi" name="delivery-terms-pi">
+                <!-- Options will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <?!= include("html/contractsform/elements/terms_of_payment"); ?>
+
+          <div class="form-row">
+            <div class="form-column-full">
+              <h3>Shipment Schedule</h3>
+              <div class="form-group">
+                <label for="shipment-from">From:</label>
+                <input type="date" id="shipment-from" name="shipment-from">
+              </div>
+              <div class="form-group">
+                <label for="shipment-to">To:</label>
+                <input type="date" id="shipment-to" name="shipment-to">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="comments-po">Comments (PO):</label>
+            <textarea id="comments-po" name="comments-po" rows="4" cols="50"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="comments-pi">Comments (PI):</label>
+            <textarea id="comments-pi" name="comments-pi" rows="4" cols="50"></textarea>
+          </div>
+
+          <button type="submit" name="action1" value="approve">Approve Contract</button>
+          <button type="submit" name="action2" value="reject">Reject Contract</button>
+        </form>
+      </section>
+      <?!= include("html/contractAuthorization/elements/sidebar"); ?>
+      <div style="display: none;" id="session_id"></div>
+      <div style="display: none;" id="contractNumber"></div>
+      <div style="display: none;" id="contract-type"></div>
+      <div style="display: none;" id="requester"></div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+
+  <?!= include('html/contractsform/scripts/contract_creation_data') ?>
+
+  <?!= include('html/contractAuthorization/scripts/initialize') ?>
+  <?!= include('html/contractAuthorization/scripts/populate') ?>
+  <?!= include('html/contractAuthorization/scripts/submitForm') ?>
+
+  <?!= include('html/contractsform/scripts/update_pricing_table') ?>
+  <?!= include('html/contractsform/scripts/update_product_names') ?>
+  <?!= include('html/contractsform/scripts/update_totals') ?>
+
+  <script>
+    updateTotals()
+  </script>
+
+</body>
+</html>

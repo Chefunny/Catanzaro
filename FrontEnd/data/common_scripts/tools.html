@@ -1,0 +1,16 @@
+<script>
+ 
+ function getSessionStorageUsage() {
+    let total = 0;
+    for (let x in sessionStorage) {
+      if (sessionStorage.hasOwnProperty(x)) {
+        total += (sessionStorage[x].length * 2) / 1024 / 1024; // Convert to MB
+      }
+    }
+    console.log(`SessionStorage usage: ${total.toFixed(2)} MB`);
+    return total;
+  }
+
+  getSessionStorageUsage();
+
+</script>

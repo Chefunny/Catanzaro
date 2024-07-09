@@ -15,7 +15,7 @@
   <header>
     <h1>Dashboard</h1>
     <div class="header-right">
-      Hello, <span id="username">User</span>
+        Hello, <span id="username"><?= getUser()['name'].split(" ")[0]?>!</span>
     </div>
   </header>
   <div class="container">

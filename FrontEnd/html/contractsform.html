@@ -10,12 +10,17 @@
   <?!= include("css/navigation"); ?>
   <?!= include("css/contractsform"); ?>
   <base target="_top">
+
+  <?!= include("data/common_scripts/fetchData") ?>
+  <?!= include("data/common_scripts/deleteData") ?>
+
+  <?!= include("data/specific/contractCreation") ?>
 </head>
 <body>
   <header>
     <h1>Contract Form</h1>
     <div class="header-right">
-      Hello, <span id="username">User</span>
+        Hello, <span id="username"><?= getUser()['name'].split(" ")[0]?>!</span>
     </div>
   </header>
   <div class="container">
@@ -154,7 +159,7 @@
         </form>
       </section>
       <?!= include("html/contractsform/elements/sidebar"); ?>
-
+      <div style="display: none;" id="session_id"><?!= makeid(8) ?></div>
     </main>
   </div>
 
@@ -167,6 +172,7 @@
   <?!= include('html/contractsform/scripts/update_pricing_table') ?>
   <?!= include('html/contractsform/scripts/update_product_names') ?>
   <?!= include('html/contractsform/scripts/update_totals') ?>
+
 
   <script>
     updateTotals()

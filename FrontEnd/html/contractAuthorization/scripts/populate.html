@@ -1,0 +1,118 @@
+<script>
+    function getSelectedContract() {
+      return JSON.parse(sessionStorage.getItem('selectedContract'));
+    }
+
+    async function populateFieldsAuth(contract) {
+
+      var products = []
+
+      for (var i = 1; i <= 5; i++) {
+        products.push({
+          "name": contract[`product${i}`],
+          "quantity": contract[`quantity${i}`],
+          "commission": contract[`commission${i}`],
+          "unitPricePO": contract[`unit-price-po${i}`],
+          "unitPricePI": contract[`unit-price-pi${i}`],
+          "packaging": contract[`packaging${i}`]
+        })
+      }
+      var product_temp
+
+      products.forEach((product, index) => {
+        if (index < 5) {
+          product_temp = document.querySelectorAll('.product')[index]
+          
+          product_temp.value = product["name"] || "";
+          updatePackagingOptions(product_temp)
+
+          document.querySelectorAll('.quantity')[index].value = product["quantity"] || "";
+          document.querySelectorAll('.packaging')[index].value = product["packaging"] || "";
+        }
+      });
+
+     updateTotals();
+
+     return products
+    }
+
+    async function updatePricingTableAuth(products) {
+
+      //console.log(products)
+
+      products.forEach((product, index) => {
+        if (index < 5 && product['name'] != "None") {
+          document.querySelectorAll('.unit-price-po')[index].value = product["unitPricePO"] || '';
+          document.querySelectorAll('.unit-price-pi')[index].value = product["unitPricePI"] || '';
+          document.querySelectorAll('.commission')[index].value = product["commission"] || '';
+        }
+      })
+    }
+
+    function populateFormAuth(contract) {
+
+      // Populate first section
+      document.getElementById('seller-po').value = contract['seller-po'] || '';
+      document.getElementById('seller-pi').value = contract['seller-pi'] || '';
+      document.getElementById('client').value = contract.client || '';
+      document.getElementById('agent-buyer').value = contract['agent-buyer'] || '';
+
+      // Populate Pricing Settings
+      document.getElementById('currency-po').value = contract.currencyPO || 'USD';
+      document.getElementById('currency-pi').value = contract.currencyPI || 'USD';
+      document.getElementById('commission-type').value = contract.commissionType || 'FOB';
+
+      // Populate Ports, Quality and Delivery Terms
+      document.getElementById('pol').value = contract.pol || '';
+      document.getElementById('pod').value = contract.pod || '';
+      document.getElementById('quality-requirement').value = contract["quality-requirement"] || '';
+      document.getElementById('delivery-terms-po').value = contract["delivery-terms-po"] || '';
+      document.getElementById('delivery-terms-pi').value = contract["delivery-terms-pi"] || '';
+
+      // Populate Terms of Payment PO
+      document.getElementById('prepayment-po').value = contract["prepayment-po"] || 0;
+      document.getElementById('cad-po').value = contract["cad-po"] || 0;
+      document.getElementById('credit-po').value = contract["credit-po"] || 0;
+      document.getElementById('credit-days-po').value = contract["credit-days-po"] || 0;
+      document.getElementById('credit-days-type-po').value = contract["credit-days-type-po"] || "";
+
+      // Populate Terms of Payment PI
+      document.getElementById('prepayment-pi').value = contract["prepayment-pi"] || 0;
+      document.getElementById('cad-pi').value = contract["cad-pi"] || 0;
+      document.getElementById('credit-pi').value = contract["credit-pi"] || 0;
+      document.getElementById('credit-days-pi').value = contract["credit-days-pi"] || 0;
+      document.getElementById('credit-days-type-pi').value = contract["credit-days-type-pi"] || "";
+
+      // Populate the shipment dates
+      document.getElementById('shipment-from').value = contract['shipment-from'] ? contract['shipment-from'].split('T')[0] : '';
+      document.getElementById('shipment-to').value = contract['shipment-to'] ? contract['shipment-to'].split('T')[0] : '';
+      
+      // Populate Comments
+      document.getElementById('comments-po').value = contract['comments-po'] || '';
+      document.getElementById('comments-pi').value = contract['comments-pi'] || '';
+
+      //Populate Contract Options
+      document.getElementById('producer-pi-number').value = contract['producer-pi-number'] || '';
+      document.getElementById('client-pi-number').value = contract['client-pi-number'] || '';
+      document.getElementById('contract-include-producer').value = contract['contract-include-producer'] || '';
+
+      document.getElementById('session_id').value = contract['sessionId'];  // very important
+      document.getElementById('contract-type').value = contract['contractType']
+      document.getElementById('requester').value = contract['requester']
+
+
+    }
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+

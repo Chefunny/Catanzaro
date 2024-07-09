@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contracts Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <?!= include("css/navigation"); ?>
+  <?!= include("css/contracts"); ?>
+  <base target="_top">
+
+  <?!= include("data/common_scripts/fetchData") ?>
+  <?!= include("data/common_scripts/deleteData") ?>
+
+  <?!= include("data/specific/contractCreation") ?>
+  <?!= include("html/authorizations/scripts"); ?>
+
+</head>
+<body>
+  <header>
+    <h1>Authorizations Overview</h1>
+    <div class="header-right">
+      Hello, <span id="username"><?= getUser()['name'].split(" ")[0]?>!</span>
+    </div>
+  </header>
+  <div class="container">
+    <aside>
+      <ul>
+        <li><a href="<?= createUrl('dashboard') ?>">Dashboard</a></li>
+        <li><a href="<?= createUrl('contracts') ?>">Contracts</a></li>
+        <li><a href="<?= createUrl('forecasts') ?>">Forecasts</a></li>
+        <li><a href="<?= createUrl('operations') ?>">Operations</a></li>
+      </ul>
+    </aside>
+    <main>
+      <section class="content">
+        <h2>All Authorizations</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Requester</th>
+              <th>Type</th>
+              <th>Date Requested</th>
+              <th>See Authorization</th>
+            </tr>
+          </thead>
+          <tbody id="contracts-tbody">
+            <!-- Dynamic content will be inserted here -->
+          </tbody>
+        </table>
+      </section>
+      <section class="sidebar">
+        <h2>Actions</h2>
+        <button class="action-button"><a href="<?= createUrl('contractsform') ?>">Create new PO/PI</a></button>
+        <button class="action-button"><a href="<?= createUrl('contracts') ?>">Go Back</a></button>
+        <button class="action-button" id="refreshButton">Refresh Authorizations</button>
+      </section>
+      <a id="view-authorization-link" href="<?= createUrl('contractAuthorization')?>" style="display:none;"></a>
+    </main>
+  </div>
+</body>
+</html>

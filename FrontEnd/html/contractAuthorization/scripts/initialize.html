@@ -1,0 +1,62 @@
+<script>
+
+  async function initializePage() {
+    await loadContractCreationData();
+
+    const contractCreationData = JSON.parse(sessionStorage.getItem('contractCreationData'));
+    const selectedContract = JSON.parse(sessionStorage.getItem("selectedContract"));
+
+    const area = selectedContract["contractType"]
+
+    populateForm(contractCreationData[area]);
+
+    document.querySelectorAll('.product').forEach(select => {
+      select.addEventListener('change', updateProductNames);
+      select.addEventListener('change', updatePricingTable);
+    });
+
+    document.getElementById('currency-po').addEventListener('change', function() {
+      const currency = this.value;
+      document.getElementById('total-currency-po').textContent = currency;
+      document.getElementById('grand-total-currency-po').textContent = currency;
+      updateTotals();
+    });
+
+    document.getElementById('currency-pi').addEventListener('change', function() {
+      const currency = this.value;
+      document.getElementById('total-currency-pi').textContent = currency;
+      document.getElementById('grand-total-currency-pi').textContent = currency;
+      updateTotals();
+    });
+
+    document.getElementById('weight-unit').addEventListener('change', function() {
+      const unit = this.value;
+      document.getElementById('weight-unit-label').textContent = unit;
+      updateTotals();
+    });
+
+    document.querySelectorAll('.product').forEach(select => {
+      select.addEventListener('change', () => {
+          updateProductNames();
+          updatePricingTable();
+      });
+    });
+
+    return selectedContract
+  }
+
+  async function loadPage() {
+    const selectedContract = await initializePage()
+    await populateFormAuth(selectedContract)
+    const products = await populateFieldsAuth(selectedContract);
+    updatePricingTable()
+
+    updatePricingTableAuth(products)
+
+    updateTotals()
+
+  }
+
+  document.addEventListener('DOMContentLoaded', loadPage);
+
+</script>

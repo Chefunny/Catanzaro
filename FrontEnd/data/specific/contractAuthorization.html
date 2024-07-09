@@ -1,0 +1,27 @@
+<script>
+
+  function getContractCreationData() {
+    return new Promise((resolve, reject) => {
+      google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).getContractCreationData();
+    });
+  }
+
+  function getContractAuthorizationData() {
+    return new Promise((resolve, reject) => {
+      google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).getContractAuthorizationData();
+    });
+  }
+
+  async function loadContractCreationData() {
+
+    const functionList = [getContractCreationData, getContractAuthorizationData];
+    const functionNameList = ['contractCreationData', 'contractAuthorizationData'];
+
+    await fetchLoadData(functionList, functionNameList);
+
+    functionNameList.push("selectedContract")
+    deleteAllDataExcept(functionNameList)
+
+  }
+
+</script>

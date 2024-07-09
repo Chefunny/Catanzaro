@@ -1,0 +1,49 @@
+<script> 
+
+  async function getSelectedContractHistory() {
+
+    const selectedContract = JSON.parse(sessionStorage.getItem('selectedContract'));
+    const contractNumber = selectedContract.contractNumber
+    
+    google.script.run.withSuccessHandler(handleResults).getContractHistory(contractNumber)
+
+  }
+
+  function handleResults(results) {
+    const container = document.getElementById('contract-history-container');
+    container.innerHTML = ''; // Clear existing content
+
+    // Save the results to sessionStorage
+    sessionStorage.setItem('contractHistoyData', JSON.stringify(results));
+
+    const sortedData = results.data.sort((a, b) => b.Version - a.Version);
+
+    sortedData.forEach(contract => {
+      const contractDiv = document.createElement('div');
+      contractDiv.className = 'contract-item';
+
+      const contractText = `
+        <h2>Version: ${contract.Version}</h2>
+        <p>Requester: ${contract.requester}</p>
+        <p>Authorizer: ${contract.authorizer}</p>
+        <p>Creation Date: ${formatDate(contract.creationDate)}</p>
+        <button onclick="seeModifications(${contract.contractNumber}, ${contract.Version})">See Modifications</button>
+        ${contract.poValid ? `<button onclick="handlePdfClick(${contract.contractNumber}, 'PO', ${contract.Version})">PO PDF</button>` : '<button disabled>PO PDF Unavailable</button>'}
+        ${contract.piValid ? `<button onclick="handlePdfClick(${contract.contractNumber}, 'PI', ${contract.Version})">PI PDF</button>` : '<button disabled>PI PDF Unavailable</button>'}
+      `;
+
+      contractDiv.innerHTML = contractText;
+      container.appendChild(contractDiv);
+    });
+
+    // Ensure the modal close button exists before assigning the onclick event
+    const closeModalButton = document.querySelector('.close');
+    if (closeModalButton) {
+      closeModalButton.onclick = function() {
+        document.getElementById('modificationsModal').style.display = 'none';
+      }
+    }
+  }
+
+
+</script>

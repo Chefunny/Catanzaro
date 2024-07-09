@@ -21,6 +21,7 @@
     const currencyPO = document.getElementById("currency-po").value;
     const currencyPI = document.getElementById("currency-pi").value;
     const contractType = document.getElementById("contract-type").value;
+    const sessionId = document.getElementById("session_id").innerText;
 
     // Existing contract modification
     //const contractNumber = document.getElementById("contractNumber").value;
@@ -31,6 +32,7 @@
     formObject["currency-po"] = currencyPO;
     formObject["currency-pi"] = currencyPI;
     formObject["contractType"] = contractType;
+    formObject["sessionId"] = sessionId;
 
     console.log(formObject);
 

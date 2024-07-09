@@ -1,0 +1,32 @@
+<script>
+
+  async function checkAndSaveSessionStorage(name, fetchFunction) {
+    const cachedData = sessionStorage.getItem(name);
+    if (!cachedData) {
+      console.log(`${name} not found in sessionStorage, fetching...`);
+      try {
+        const data = await fetchFunction();
+        sessionStorage.setItem(name, JSON.stringify(data));
+        console.log(`${name} fetched and saved to sessionStorage:`, data);
+      } catch (error) {
+        console.error(`Failed to fetch ${name}:`, error);
+      }
+    } else {
+      console.log(`${name} is already in sessionStorage.`);
+    }
+  }
+
+  async function fetchLoadData(functionList, functionNameList) {
+    if (functionList.length !== functionNameList.length) {
+      throw new Error('Function list and function name list must be of the same length');
+    }
+
+    const tasks = functionList.map((func, index) => {
+      const name = functionNameList[index];
+      return checkAndSaveSessionStorage(name, func);
+    });
+
+    await Promise.all(tasks);
+  }
+
+</script>
